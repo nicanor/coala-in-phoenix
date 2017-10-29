@@ -1,0 +1,31 @@
+<h2>Listar Publicaciones</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Type</th>
+      <th>Public</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for publication <- @publications do %>
+    <tr>
+      <td><%= publication.title %></td>
+      <td><%= publication.type %></td>
+      <td><%= publication.public %></td>
+
+      <td class="text-right">
+        <span><%= link "Ver", to: publication_path(@conn, :show, publication), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Editar", to: publication_path(@conn, :edit, publication), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Eliminar", to: publication_path(@conn, :delete, publication),
+          method: :delete, data: [confirm: "Seguro?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "Nueva Publicación", to: publication_path(@conn, :new) %></span>
