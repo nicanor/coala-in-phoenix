@@ -84,8 +84,9 @@ defmodule Koala.CMSTest do
   describe "images" do
     alias Koala.CMS.Image
 
-    @valid_attrs %{image: "some image"}
-    @update_attrs %{image: "some updated image"}
+    @img %Plug.Upload{content_type: "image/jpeg", path: "example.jpg", filename: "example.jpg"}
+
+    @valid_attrs %{image: Path.dirname(__DIR__) <> "/cms/example.jpg"}
     @invalid_attrs %{image: nil}
 
     def image_fixture(attrs \\ %{}) do
@@ -109,7 +110,7 @@ defmodule Koala.CMSTest do
 
     test "create_image/1 with valid data creates a image" do
       assert {:ok, %Image{} = image} = CMS.create_image(@valid_attrs)
-      assert image.image == "some image"
+      assert image.image.file_name == "example.jpg"
     end
 
     test "create_image/1 with invalid data returns error changeset" do

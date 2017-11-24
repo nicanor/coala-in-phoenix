@@ -4,7 +4,6 @@ defmodule KoalaWeb.Image do
 
   def __storage, do: Arc.Storage.Local
   # Include ecto support (requires package arc_ecto installed):
-  # use Arc.Ecto.Definition
 
   # To add a thumbnail version:
   @versions [:original, :mini, :thumb]
@@ -32,7 +31,6 @@ defmodule KoalaWeb.Image do
   defp name("original", file_name), do: file_name;
   defp name(:original, file_name), do: file_name;
   defp name(version, file_name), do: "#{version}-#{file_name}"
-
 
   # Override the storage directory:
   def storage_dir(version, {file, scope}) do

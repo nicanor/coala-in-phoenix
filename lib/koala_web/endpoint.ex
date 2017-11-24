@@ -14,7 +14,6 @@ defmodule KoalaWeb.Endpoint do
   plug Plug.Static,
     at: "/img", from: Path.expand('./img'), gzip: false
 
-
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do

@@ -2,8 +2,9 @@ defmodule KoalaWeb.ImageControllerTest do
   use KoalaWeb.ConnCase
 
   alias Koala.CMS
-
-  @create_attrs %{image: "some image"}
+  @file_path Plug.Upload.random_file!(".jpg")
+  @img %Plug.Upload{content_type: "image/jpeg", path: @file_path, filename: "example.jpg"}
+  @create_attrs %{image: Path.dirname(__DIR__) <> "/img/example.jpg"}
   @invalid_attrs %{image: nil}
 
   def fixture(:image) do
@@ -14,7 +15,7 @@ defmodule KoalaWeb.ImageControllerTest do
   describe "index" do
     test "lists all images", %{conn: conn} do
       conn = get conn, image_path(conn, :index)
-      assert html_response(conn, 200) =~ "Listing Images"
+      assert html_response(conn, 200) =~ "Lista de imágenes"
     end
   end
 
@@ -33,7 +34,7 @@ defmodule KoalaWeb.ImageControllerTest do
       assert redirected_to(conn) == image_path(conn, :show, id)
 
       conn = get conn, image_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "Show Image"
+      assert html_response(conn, 200) =~ "Imágen"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
