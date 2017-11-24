@@ -56,6 +56,7 @@ defmodule Koala.CMS do
       ** (Ecto.NoResultsError)
 
   """
+  def get_publication!(id) when is_integer(id), do: Repo.get!(Publication, id)
   def get_publication!(slug), do: Repo.get_by!(Publication, slug: slug)
   def get_publication!(type, slug), do: Repo.get_by!(Publication, type: type, slug: slug)
 

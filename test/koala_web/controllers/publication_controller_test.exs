@@ -15,14 +15,14 @@ defmodule KoalaWeb.PublicationControllerTest do
   describe "index" do
     test "lists all publications", %{conn: conn} do
       conn = get conn, publication_path(conn, :index)
-      assert html_response(conn, 200) =~ "Listado de publicaciones"
+      assert html_response(conn, 200) =~ "Lista de publicaciones"
     end
   end
 
   describe "new publication" do
     test "renders form", %{conn: conn} do
       conn = get conn, publication_path(conn, :new)
-      assert html_response(conn, 200) =~ "Nueva Publicación"
+      assert html_response(conn, 200) =~ "Nueva publicación"
     end
   end
 
@@ -39,7 +39,7 @@ defmodule KoalaWeb.PublicationControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post conn, publication_path(conn, :create), publication: @invalid_attrs
-      assert html_response(conn, 200) =~ "Nueva Publicación"
+      assert html_response(conn, 200) =~ "Nueva publicación"
     end
   end
 
@@ -57,8 +57,9 @@ defmodule KoalaWeb.PublicationControllerTest do
 
     test "redirects when data is valid", %{conn: conn, publication: publication} do
       conn = put conn, publication_path(conn, :update, publication), publication: @update_attrs
-      assert redirected_to(conn) == publication_path(conn, :show, publication)
+      publication = CMS.get_publication!(publication.id) # To have updated slug.
 
+      assert redirected_to(conn) == publication_path(conn, :show, publication)
       conn = get conn, publication_path(conn, :show, publication)
       assert html_response(conn, 200) =~ "some updated content"
     end

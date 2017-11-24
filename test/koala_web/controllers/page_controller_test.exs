@@ -3,6 +3,6 @@ defmodule KoalaWeb.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"
-    assert html_response(conn, 200) =~ "Sitio web de Coala!"
+    assert html_response(conn, 200) =~ "Coala"
   end
 end

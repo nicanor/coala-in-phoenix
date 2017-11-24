@@ -4,7 +4,6 @@ defmodule KoalaWeb.ImageControllerTest do
   alias Koala.CMS
 
   @create_attrs %{image: "some image"}
-  @update_attrs %{image: "some updated image"}
   @invalid_attrs %{image: nil}
 
   def fixture(:image) do
@@ -40,32 +39,6 @@ defmodule KoalaWeb.ImageControllerTest do
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post conn, image_path(conn, :create), image: @invalid_attrs
       assert html_response(conn, 200) =~ "New Image"
-    end
-  end
-
-  describe "edit image" do
-    setup [:create_image]
-
-    test "renders form for editing chosen image", %{conn: conn, image: image} do
-      conn = get conn, image_path(conn, :edit, image)
-      assert html_response(conn, 200) =~ "Edit Image"
-    end
-  end
-
-  describe "update image" do
-    setup [:create_image]
-
-    test "redirects when data is valid", %{conn: conn, image: image} do
-      conn = put conn, image_path(conn, :update, image), image: @update_attrs
-      assert redirected_to(conn) == image_path(conn, :show, image)
-
-      conn = get conn, image_path(conn, :show, image)
-      assert html_response(conn, 200) =~ "some updated image"
-    end
-
-    test "renders errors when data is invalid", %{conn: conn, image: image} do
-      conn = put conn, image_path(conn, :update, image), image: @invalid_attrs
-      assert html_response(conn, 200) =~ "Edit Image"
     end
   end
 
