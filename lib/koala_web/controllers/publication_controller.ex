@@ -1,6 +1,8 @@
 defmodule KoalaWeb.PublicationController do
   use KoalaWeb, :controller
 
+  plug :put_layout, "admin.html"
+
   alias Koala.CMS
   alias Koala.CMS.Publication
 
@@ -11,7 +13,7 @@ defmodule KoalaWeb.PublicationController do
 
   def new(conn, _params) do
     changeset = CMS.change_publication(%Publication{})
-    render(conn, "new.html", changeset: changeset, valid_types: CMS.valid_types)
+    render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"publication" => publication_params}) do
@@ -21,7 +23,7 @@ defmodule KoalaWeb.PublicationController do
         |> put_flash(:info, "Publication created successfully.")
         |> redirect(to: publication_path(conn, :show, publication))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset, valid_types: CMS.valid_types)
+        render(conn, "new.html", changeset: changeset)
     end
   end
 
@@ -33,7 +35,7 @@ defmodule KoalaWeb.PublicationController do
   def edit(conn, %{"id" => id}) do
     publication = CMS.get_publication!(id)
     changeset = CMS.change_publication(publication)
-    render(conn, "edit.html", publication: publication, changeset: changeset, valid_types: CMS.valid_types)
+    render(conn, "edit.html", publication: publication, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "publication" => publication_params}) do
@@ -45,7 +47,7 @@ defmodule KoalaWeb.PublicationController do
         |> put_flash(:info, "Publication updated successfully.")
         |> redirect(to: publication_path(conn, :show, publication))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", publication: publication, changeset: changeset, valid_types: CMS.valid_types)
+        render(conn, "edit.html", publication: publication, changeset: changeset)
     end
   end
 

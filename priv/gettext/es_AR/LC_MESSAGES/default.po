@@ -1,0 +1,86 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: es_AR\n"
+
+#: lib/koala_web/templates/publication/edit.html.eex:5
+#: lib/koala_web/templates/publication/new.html.eex:5
+#: lib/koala_web/templates/publication/show.html.eex:49
+msgid "Back"
+msgstr "Volver"
+
+#: lib/koala_web/views/publication_view.ex:21
+msgid "yes"
+msgstr "Sí"
+
+#: lib/koala_web/templates/publication/index.html.eex:24
+msgid "Are you sure?"
+msgstr "¿Estás seguro?"
+
+#: lib/koala_web/templates/publication/index.html.eex:23
+msgid "Delete"
+msgstr "Eliminar"
+
+#: lib/koala_web/templates/publication/index.html.eex:22
+#: lib/koala_web/templates/publication/show.html.eex:48
+msgid "Edit"
+msgstr "Editar"
+
+#: lib/koala_web/templates/publication/index.html.eex:1
+msgid "Listing publications"
+msgstr "Lista de publicaciones"
+
+#: lib/koala_web/templates/publication/index.html.eex:31
+#: lib/koala_web/templates/publication/new.html.eex:1
+msgid "New publication"
+msgstr "Nueva publicación"
+
+#: lib/koala_web/templates/publication/form.html.eex:39
+#: lib/koala_web/templates/publication/index.html.eex:8
+msgid "Public"
+msgstr "Público"
+
+#: lib/koala_web/templates/publication/index.html.eex:21
+msgid "Show"
+msgstr "Ver"
+
+#: lib/koala_web/templates/publication/form.html.eex:15
+#: lib/koala_web/templates/publication/index.html.eex:6
+msgid "Title"
+msgstr "Título"
+
+#: lib/koala_web/templates/publication/form.html.eex:9
+#: lib/koala_web/templates/publication/index.html.eex:7
+msgid "Type"
+msgstr "Tipo"
+
+#: lib/koala_web/templates/publication/form.html.eex:33
+msgid "Content"
+msgstr "Contenido"
+
+#: lib/koala_web/templates/publication/form.html.eex:27
+msgid "Description"
+msgstr "Descripción"
+
+#: lib/koala_web/templates/publication/form.html.eex:51
+msgid "Facebook path"
+msgstr "Link a Facebook"
+
+#: lib/koala_web/templates/publication/form.html.eex:45
+msgid "Publication date"
+msgstr "Fecha de publicación"
+
+#: lib/koala_web/templates/publication/form.html.eex:57
+msgid "Submit"
+msgstr "Guardar"
+
+#: lib/koala_web/templates/publication/form.html.eex:21
+msgid "Slug"
+msgstr "Dirección URI"

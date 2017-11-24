@@ -28,6 +28,20 @@ defmodule Koala.CMS do
     Repo.all(Publication)
   end
 
+  def public_publications do
+    query = from(p in Publication, where: p.public == true, select: struct(p, [:title, :slug, :type, :description]))
+    Repo.all(query)
+  end
+
+  def public_recipes do
+    public_publications("recipe")
+  end
+
+  def public_publications(type) do
+    query = from(p in Publication, where: [type: ^type, public: true], select: struct(p, [:title, :slug, :type, :description]))
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single publication.
 
@@ -42,7 +56,8 @@ defmodule Koala.CMS do
       ** (Ecto.NoResultsError)
 
   """
-  def get_publication!(id), do: Repo.get!(Publication, id)
+  def get_publication!(slug), do: Repo.get_by!(Publication, slug: slug)
+  def get_publication!(type, slug), do: Repo.get_by!(Publication, type: type, slug: slug)
 
   @doc """
   Creates a publication.

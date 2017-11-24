@@ -1,0 +1,3 @@
+<article class="content">
+  <%= @publication.content |> Earmark.as_html! |> raw %>
+</article>

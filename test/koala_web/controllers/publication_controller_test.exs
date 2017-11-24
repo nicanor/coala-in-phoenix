@@ -3,8 +3,8 @@ defmodule KoalaWeb.PublicationControllerTest do
 
   alias Koala.CMS
 
-  @create_attrs %{content: "some content", description: "some description", facebook_path: "some facebook_path", public: true, publication_date: ~D[2010-04-17], slug: "some slug", title: "some title", type: "some type"}
-  @update_attrs %{content: "some updated content", description: "some updated description", facebook_path: "some updated facebook_path", public: false, publication_date: ~D[2011-05-18], slug: "some updated slug", title: "some updated title", type: "some updated type"}
+  @create_attrs %{content: "some content", description: "some description", facebook_path: "some facebook_path", public: true, publication_date: ~D[2010-04-17], slug: "some-slug", title: "some title", type: "page"}
+  @update_attrs %{content: "some updated content", description: "some updated description", facebook_path: "some updated facebook_path", public: false, publication_date: ~D[2011-05-18], slug: "some-updated-slug", title: "some updated title", type: "recipe"}
   @invalid_attrs %{content: nil, description: nil, facebook_path: nil, public: nil, publication_date: nil, slug: nil, title: nil, type: nil}
 
   def fixture(:publication) do
@@ -15,14 +15,14 @@ defmodule KoalaWeb.PublicationControllerTest do
   describe "index" do
     test "lists all publications", %{conn: conn} do
       conn = get conn, publication_path(conn, :index)
-      assert html_response(conn, 200) =~ "Listing Publications"
+      assert html_response(conn, 200) =~ "Listado de publicaciones"
     end
   end
 
   describe "new publication" do
     test "renders form", %{conn: conn} do
       conn = get conn, publication_path(conn, :new)
-      assert html_response(conn, 200) =~ "New Publication"
+      assert html_response(conn, 200) =~ "Nueva Publicación"
     end
   end
 
@@ -34,12 +34,12 @@ defmodule KoalaWeb.PublicationControllerTest do
       assert redirected_to(conn) == publication_path(conn, :show, id)
 
       conn = get conn, publication_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "Show Publication"
+      assert html_response(conn, 200) =~ "Ver Publicación"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post conn, publication_path(conn, :create), publication: @invalid_attrs
-      assert html_response(conn, 200) =~ "New Publication"
+      assert html_response(conn, 200) =~ "Nueva Publicación"
     end
   end
 
@@ -48,7 +48,7 @@ defmodule KoalaWeb.PublicationControllerTest do
 
     test "renders form for editing chosen publication", %{conn: conn, publication: publication} do
       conn = get conn, publication_path(conn, :edit, publication)
-      assert html_response(conn, 200) =~ "Edit Publication"
+      assert html_response(conn, 200) =~ "Editar Publicación"
     end
   end
 
@@ -65,7 +65,7 @@ defmodule KoalaWeb.PublicationControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn, publication: publication} do
       conn = put conn, publication_path(conn, :update, publication), publication: @invalid_attrs
-      assert html_response(conn, 200) =~ "Edit Publication"
+      assert html_response(conn, 200) =~ "Editar Publicación"
     end
   end
 

@@ -1,0 +1,9 @@
+/* This file is for your main application css. */
+.bad {
+  color: #ff1a22;
+}
+
+.good {
+  font-weight: bold;
+  color: green;
+}

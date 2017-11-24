@@ -1,36 +1,24 @@
-<div class="jumbotron">
-  <h2><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
-</div>
+<section class="single-page">
+  <%= img_tag("/images/logo-mediano.jpg", class: "mediano") %>
+</section>
 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Resources</h4>
-    <ul>
-      <li>
-        <a href="http://phoenixframework.org/docs/overview">Guides</a>
-      </li>
-      <li>
-        <a href="https://hexdocs.pm/phoenix">Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-    </ul>
+<article class="content">
+  <div class="jumbotron">
+    <p class="lead">
+      Somos una organización de voluntarios sin ánimo de lucro.<br />
+      Coala nació en Agosto de 2013 y a partir de entonces busca,
+      a través de un activismo constante y comprometido,
+      ponerle fin a la explotación animal.
+    </p>
   </div>
+</article>
 
-  <div class="col-lg-6">
-    <h4>Help</h4>
+<section class="articles">
+  <nav class="articles-inner">
     <ul>
-      <li>
-        <a href="http://groups.google.com/group/phoenix-talk">Mailing list</a>
-      </li>
-      <li>
-        <a href="http://webchat.freenode.net/?channels=elixir-lang">#elixir-lang on freenode IRC</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">@elixirphoenix</a>
-      </li>
+      <%= for publication <- @publications do %>
+        <li><%= link publication.title, to: page_path(@conn, :show, path_for(publication.type), publication) %></li>
+      <% end %>
     </ul>
-  </div>
-</div>
+  </nav>
+</section>

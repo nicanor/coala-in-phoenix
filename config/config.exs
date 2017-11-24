@@ -17,6 +17,8 @@ config :koala, KoalaWeb.Endpoint,
   pubsub: [name: Koala.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :koala, KoalaWeb.Gettext, default_locale: "es_AR"
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

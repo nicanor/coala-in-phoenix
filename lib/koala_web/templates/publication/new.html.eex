@@ -1,5 +1,5 @@
-<h2>New Publication</h2>
+<h2><%= gettext("New publication") %></h2>
 
 <%= render "form.html", Map.put(assigns, :action, publication_path(@conn, :create)) %>
 
-<span><%= link "Back", to: publication_path(@conn, :index) %></span>
+<span><%= link gettext("Back"), to: publication_path(@conn, :index) %></span>

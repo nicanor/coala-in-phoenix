@@ -1,48 +1,44 @@
-<h2>Show Publication</h2>
+<h2>Ver Publicación</h2>
 
 <ul>
 
   <li>
-    <strong>Title:</strong>
+    <strong><%= gettext("Title") %></strong>
     <%= @publication.title %>
   </li>
 
   <li>
-    <strong>Slug:</strong>
-    <%= @publication.slug %>
+    <strong><%= gettext("Slug") %></strong>
+    <code>/<%= @publication.type %>/<%= @publication.slug %></code>
   </li>
 
   <li>
-    <strong>Type:</strong>
-    <%= @publication.type %>
-  </li>
-
-  <li>
-    <strong>Description:</strong>
+    <strong><%= gettext("Description") %></strong>
     <%= @publication.description %>
   </li>
 
   <li>
-    <strong>Content:</strong>
-    <%= @publication.content %>
-  </li>
-
-  <li>
-    <strong>Public:</strong>
+    <strong><%= gettext("Public") %></strong>
     <%= @publication.public %>
   </li>
 
   <li>
-    <strong>Publication date:</strong>
+    <strong><%= gettext("Publication date") %></strong>
     <%= @publication.publication_date %>
   </li>
 
   <li>
-    <strong>Facebook path:</strong>
+    <strong><%= gettext("Facebook path") %></strong>
     <%= @publication.facebook_path %>
+  </li>
+
+  <li>
+    <strong><%= gettext("Content") %></strong>
   </li>
 
 </ul>
 
-<span><%= link "Edit", to: publication_path(@conn, :edit, @publication) %></span>
-<span><%= link "Back", to: publication_path(@conn, :index) %></span>
+<%= @publication.content |> Earmark.as_html! |> raw %>
+
+<span><%= link gettext("Edit"), to: publication_path(@conn, :edit, @publication) %></span>
+<span><%= link gettext("Back"), to: publication_path(@conn, :index) %></span>

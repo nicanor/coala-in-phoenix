@@ -3,13 +3,9 @@ defmodule Koala.CMS.Publication do
   import Ecto.Changeset
   alias Koala.CMS.Publication
 
-  @valid_types [
-                 "Artículo": "article",
-                 "Página": "page",
-                 "Receta": "recipe",
-                 "Pregunta Frecuente": "faq",
-                 "Primaria": "primary"
-               ]
+  @valid_types ["article", "page", "recipe", "faq", "primary"]
+  @derive {Phoenix.Param, key: :slug}
+
 
   schema "publications" do
     field :content, :string
@@ -29,16 +25,12 @@ defmodule Koala.CMS.Publication do
     publication
     |> cast(attrs, [:title, :slug, :type, :description, :content, :public, :publication_date, :facebook_path])
     |> validate_required([:title, :slug, :type, :description, :content, :public, :publication_date, :facebook_path])
-    |> validate_inclusion(:type, valid_types_values)
+    |> validate_inclusion(:type, valid_types())
     |> validate_format(:slug, ~r/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
     |> unique_constraint(:slug)
   end
 
   def valid_types do
     @valid_types
-  end
-
-  defp valid_types_values do
-    Keyword.values(valid_types)
   end
 end

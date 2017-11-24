@@ -6,30 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" >
 
-    <title>Hello Koala!</title>
+    <title>Coala - Activismo por los animales</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+    <header class="header" role="banner">
+      <div class="header-inner">
+        <div class="logo"><a href="/"><%= img_tag("/images/logo-verde.png", class: "logo") %></a></div>
+        <nav class="navigation">
+          <ul>
+            <li><%= link "Paginas", to: "/" %></li>
           </ul>
         </nav>
-        <span class="logo"></span>
-      </header>
-
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
-
-    </div> <!-- /container -->
+      </div>
+    </header>
+    <main>
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+    <footer class="footer">
+      <div class="footer-inner" style='text-align:center;'>
+        <p>Created by <a href="/">Nicanor Perera</a>.</p>
+        <p><%= link 'Admin Publicaciones', to: publication_path(@conn, :index) %></p>
+      </div>
+    </footer>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

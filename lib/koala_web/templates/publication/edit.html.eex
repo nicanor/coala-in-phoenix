@@ -1,5 +1,5 @@
-<h2>Edit Publication</h2>
+<h2>Editar Publicación</h2>
 
 <%= render "form.html", Map.put(assigns, :action, publication_path(@conn, :update, @publication)) %>
 
-<span><%= link "Back", to: publication_path(@conn, :index) %></span>
+<span><%= link gettext("Back"), to: publication_path(@conn, :index) %></span>

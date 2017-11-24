@@ -1,11 +1,11 @@
-<h2>Listar Publicaciones</h2>
+<h2><%= gettext("Listing publications") %></h2>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Type</th>
-      <th>Public</th>
+      <th><%= gettext("Title") %></th>
+      <th><%= gettext("Type") %></th>
+      <th><%= gettext("Public") %></th>
 
       <th></th>
     </tr>
@@ -14,18 +14,18 @@
 <%= for publication <- @publications do %>
     <tr>
       <td><%= publication.title %></td>
-      <td><%= publication.type %></td>
-      <td><%= publication.public %></td>
+      <td><%= type_name(publication.type) %></td>
+      <td><%= tick(publication.public) %></td>
 
       <td class="text-right">
-        <span><%= link "Ver", to: publication_path(@conn, :show, publication), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Editar", to: publication_path(@conn, :edit, publication), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Eliminar", to: publication_path(@conn, :delete, publication),
-          method: :delete, data: [confirm: "Seguro?"], class: "btn btn-danger btn-xs" %></span>
+        <span><%= link gettext("Show"), to: publication_path(@conn, :show, publication), class: "btn btn-default btn-xs" %></span>
+        <span><%= link gettext("Edit"), to: publication_path(@conn, :edit, publication), class: "btn btn-default btn-xs" %></span>
+        <span><%= link gettext("Delete"), to: publication_path(@conn, :delete, publication),
+          method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "Nueva Publicación", to: publication_path(@conn, :new) %></span>
+<span><%= link gettext("New publication"), to: publication_path(@conn, :new) %></span>
