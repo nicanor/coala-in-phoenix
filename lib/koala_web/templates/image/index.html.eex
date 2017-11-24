@@ -1,9 +1,10 @@
-<h2>Listing Images</h2>
+<h2>Lista de Imágenes</h2>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Image</th>
+      <th>Imágen</th>
+      <th>Path</th>
 
       <th></th>
     </tr>
@@ -11,15 +12,15 @@
   <tbody>
 <%= for image <- @images do %>
     <tr>
-      <td><%= image.image %></td>
-
+      <td><%= img_tag KoalaWeb.Image.url({image.image, image}, :mini) %></td>
+      <td><code><%= KoalaWeb.Image.url({image.image, image}, signed: true) %></code></td>
       <td class="text-right">
-        <span><%= link "Show", to: image_path(@conn, :show, image), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: image_path(@conn, :delete, image), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+        <span><%= link "Ver", to: image_path(@conn, :show, image), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Eliminar", to: image_path(@conn, :delete, image), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Image", to: image_path(@conn, :new) %></span>
+<span><%= link "Nueva imágen", to: image_path(@conn, :new), class: "btn btn-primary"  %></span>

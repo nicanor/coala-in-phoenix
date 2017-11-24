@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-<%= for publication <- @publications do %>
+<%= for publication <- Enum.sort_by(@publications, &(!&1.public)) do %>
     <tr>
       <td><%= publication.title %></td>
       <td><%= type_name(publication.type) %></td>

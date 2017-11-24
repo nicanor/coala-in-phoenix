@@ -1,12 +1,14 @@
-<h2>Show Image</h2>
+<h2>Imágen</h2>
 
-<ul>
+<p>URL:
+  <code><%= KoalaWeb.Image.url({@image.image, @image}, signed: true) %></code>
+</p>
 
-  <li>
-    <strong>Image:</strong>
-    <%= @image.image %>
-  </li>
+<h4>Cómo usar en publicaciones:</h4>
 
-</ul>
+<p><code>![Texto alternativo](<%= KoalaWeb.Image.url({@image.image, @image}, signed: true) %> "Título")</code></p>
+<p><small>Donde el texto alternativo son las palabras a mostrar en caso de que no cargue la imágen.</small></p>
 
-<span><%= link "Back", to: image_path(@conn, :index) %></span>
+<%= img_tag KoalaWeb.Image.url({@image.image, @image}), class: :thumbnail %>
+
+<%= link "Volver", to: image_path(@conn, :index), class: "btn btn-primary" %>

@@ -1,6 +1,8 @@
 defmodule KoalaWeb.ImageController do
   use KoalaWeb, :controller
 
+  plug :put_layout, "admin.html"
+
   alias Koala.CMS
   alias Koala.CMS.Image
 

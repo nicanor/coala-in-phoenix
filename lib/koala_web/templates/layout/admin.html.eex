@@ -19,7 +19,8 @@
             <%= img_tag("/images/logo-verde.png", class: "logo") %>
           <% end %>
           <ul class="nav nav-pills pull-right">
-            <li><a href="/">Sitio web</a></li>
+            <li><%= link "Sitio web", to: "/", target: "_blank" %></li>
+            <li><%= link "Imágenes", to: image_path(@conn, :index) %></li>
           </ul>
         </nav>
         <span class="logo"></span>
