@@ -80,4 +80,51 @@ defmodule Koala.CMSTest do
       assert %Ecto.Changeset{} = CMS.change_publication(publication)
     end
   end
+
+  describe "images" do
+    alias Koala.CMS.Image
+
+    @valid_attrs %{image: "some image"}
+    @update_attrs %{image: "some updated image"}
+    @invalid_attrs %{image: nil}
+
+    def image_fixture(attrs \\ %{}) do
+      {:ok, image} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> CMS.create_image()
+
+      image
+    end
+
+    test "list_images/0 returns all images" do
+      image = image_fixture()
+      assert CMS.list_images() == [image]
+    end
+
+    test "get_image!/1 returns the image with given id" do
+      image = image_fixture()
+      assert CMS.get_image!(image.id) == image
+    end
+
+    test "create_image/1 with valid data creates a image" do
+      assert {:ok, %Image{} = image} = CMS.create_image(@valid_attrs)
+      assert image.image == "some image"
+    end
+
+    test "create_image/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = CMS.create_image(@invalid_attrs)
+    end
+
+    test "delete_image/1 deletes the image" do
+      image = image_fixture()
+      assert {:ok, %Image{}} = CMS.delete_image(image)
+      assert_raise Ecto.NoResultsError, fn -> CMS.get_image!(image.id) end
+    end
+
+    test "change_image/1 returns a image changeset" do
+      image = image_fixture()
+      assert %Ecto.Changeset{} = CMS.change_image(image)
+    end
+  end
 end

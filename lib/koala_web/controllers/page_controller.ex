@@ -25,6 +25,6 @@ defmodule KoalaWeb.PageController do
   defp type_from_path("recetas"), do: "recipe"
   defp type_from_path("articulos"), do: "articles"
   defp type_from_path("preguntas-frequentes"), do: "faq"
-  defp type_from_path("paginas"), do: "page"
+  defp type_from_path(_), do: "page"
 
 end

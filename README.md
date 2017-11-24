@@ -1,4 +1,4 @@
-# Koala
+# Coala website in Phoenix Framework
 
 To start your Phoenix server:
 

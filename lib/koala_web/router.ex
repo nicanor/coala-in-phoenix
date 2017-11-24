@@ -16,6 +16,7 @@ defmodule KoalaWeb.Router do
   scope "/admin", KoalaWeb do
     pipe_through :browser # Use the default browser stack
     resources "/publications", PublicationController
+    resources "/images", ImageController
     get "/", PageController, :index
   end
 
