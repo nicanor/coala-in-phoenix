@@ -15,6 +15,7 @@ defmodule KoalaWeb.Router do
 
   scope "/admin", KoalaWeb do
     pipe_through :browser # Use the default browser stack
+    resources "/categories", CategoryController
     resources "/publications", PublicationController
     resources "/images", ImageController
     get "/", PageController, :index
@@ -23,7 +24,7 @@ defmodule KoalaWeb.Router do
   scope "/", KoalaWeb do
     pipe_through :browser
     get "/sitemap", PageController, :sitemap
-    get "/:type/:id", PageController, :show
+    get "/:category_slug/:slug", PageController, :show
     get "/", PageController, :index
   end
   # Other scopes may use custom stacks.

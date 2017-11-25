@@ -7,6 +7,7 @@ defmodule Koala.CMS do
   alias Koala.Repo
 
   alias Koala.CMS.Publication
+  alias Koala.CMS.Category
 
   @doc """
   Returns valid page types
@@ -42,6 +43,14 @@ defmodule Koala.CMS do
     Repo.all(query)
   end
 
+  def index do
+    query = from c in Category,
+      join: p in assoc(c, :publications),
+      preload: [publications: p],
+      select: [:id, :name, :slug, publications: [:id, :category_id, :title, :slug]]
+    Repo.all query
+  end
+
   @doc """
   Gets a single publication.
 
@@ -59,6 +68,15 @@ defmodule Koala.CMS do
   def get_publication!(id) when is_integer(id), do: Repo.get!(Publication, id)
   def get_publication!(slug), do: Repo.get_by!(Publication, slug: slug)
   def get_publication!(type, slug), do: Repo.get_by!(Publication, type: type, slug: slug)
+
+  def get_publication_with_category!(slug) do
+    query = from p in Publication,
+      join: c in  Category,
+      on: p.category_id == c.id,
+      where: p.slug == ^slug,
+      preload: [category: c]
+    Repo.one query
+  end
 
   @doc """
   Creates a publication.
@@ -201,5 +219,108 @@ defmodule Koala.CMS do
   """
   def change_image(%Image{} = image) do
     Image.changeset(image, %{})
+  end
+
+
+  @doc """
+  Returns the list of categories.
+
+  ## Examples
+
+      iex> list_categories()
+      [%Category{}, ...]
+
+  """
+  def list_categories do
+    Repo.all(Category)
+  end
+
+  def list_categories_with_publications do
+    Repo.all from c in Category, preload: [:publications]
+  end
+
+  def list_categories_for_select do
+    Repo.all from c in Category, order_by: c.name, select: {c.name, c.id}
+  end
+
+  @doc """
+  Gets a single category.
+
+  Raises `Ecto.NoResultsError` if the Category does not exist.
+
+  ## Examples
+
+      iex> get_category!(123)
+      %Category{}
+
+      iex> get_category!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_category!(id), do: Repo.get!(Category, id)
+
+  @doc """
+  Creates a category.
+
+  ## Examples
+
+      iex> create_category(%{field: value})
+      {:ok, %Category{}}
+
+      iex> create_category(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_category(attrs \\ %{}) do
+    %Category{}
+    |> Category.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a category.
+
+  ## Examples
+
+      iex> update_category(category, %{field: new_value})
+      {:ok, %Category{}}
+
+      iex> update_category(category, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_category(%Category{} = category, attrs) do
+    category
+    |> Category.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Category.
+
+  ## Examples
+
+      iex> delete_category(category)
+      {:ok, %Category{}}
+
+      iex> delete_category(category)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_category(%Category{} = category) do
+    Repo.delete(category)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking category changes.
+
+  ## Examples
+
+      iex> change_category(category)
+      %Ecto.Changeset{source: %Category{}}
+
+  """
+  def change_category(%Category{} = category) do
+    Category.changeset(category, %{})
   end
 end

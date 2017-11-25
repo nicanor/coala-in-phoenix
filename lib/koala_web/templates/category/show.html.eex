@@ -1,0 +1,23 @@
+<h2>Categoría</h2>
+
+<ul>
+
+  <li>
+    <strong>Nombre:</strong>
+    <%= @category.name %>
+  </li>
+
+  <li>
+    <strong>URI:</strong>
+    <code><%= @category.slug %></code>
+  </li>
+
+  <li>
+    <strong>Descripción:</strong>
+    <%= @category.description %>
+  </li>
+
+</ul>
+
+<span><%= link "Editar", to: category_path(@conn, :edit, @category), class: "btn btn-primary" %></span>
+<span><%= link "Volver", to: category_path(@conn, :index), class: "btn btn-default" %></span>

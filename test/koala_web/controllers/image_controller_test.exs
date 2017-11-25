@@ -1,9 +1,7 @@
 defmodule KoalaWeb.ImageControllerTest do
   use KoalaWeb.ConnCase
-
   alias Koala.CMS
-  @file_path Plug.Upload.random_file!(".jpg")
-  @img %Plug.Upload{content_type: "image/jpeg", path: @file_path, filename: "example.jpg"}
+
   @create_attrs %{image: Path.dirname(__DIR__) <> "/img/example.jpg"}
   @invalid_attrs %{image: nil}
 

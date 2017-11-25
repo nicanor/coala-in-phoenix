@@ -34,7 +34,7 @@ defmodule KoalaWeb.PublicationControllerTest do
       assert redirected_to(conn) == publication_path(conn, :show, id)
 
       conn = get conn, publication_path(conn, :show, id)
-      assert html_response(conn, 200) =~ "Ver Publicación"
+      assert html_response(conn, 200) =~ "Publicación"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do

@@ -14,8 +14,8 @@ defmodule KoalaWeb.PageController do
     render(conn, "sitemap.html", publications: publications)
   end
 
-  def show(conn, %{"id" => id, "type" => type}) do
-    publication = CMS.get_publication!(type_from_path(type), id)
+  def show(conn, %{"id" => id, "category" => category}) do
+    publication = CMS.get_publication_with_category!(id)
     publications = CMS.public_publications(publication.type)
     render(conn, "show.html", publication: publication, publications: publications)
   end

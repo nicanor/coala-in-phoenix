@@ -4,17 +4,23 @@
   <thead>
     <tr>
       <th><%= gettext("Title") %></th>
-      <th><%= gettext("Type") %></th>
       <th><%= gettext("Public") %></th>
 
       <th></th>
     </tr>
   </thead>
   <tbody>
-<%= for publication <- Enum.sort_by(@publications, &(!&1.public)) do %>
+<%= for category <- @categories do %>
+<tr>
+  <th><%= category.name %></th>
+  <th></th>
+
+  <th></th>
+</tr>
+
+<%= for publication <- Enum.sort_by(category.publications, &(!&1.public)) do %>
     <tr>
       <td><%= publication.title %></td>
-      <td><%= type_name(publication.type) %></td>
       <td><%= tick(publication.public) %></td>
 
       <td class="text-right">
@@ -25,7 +31,10 @@
       </td>
     </tr>
 <% end %>
+
+<% end %>
+
   </tbody>
 </table>
 
-<span><%= link gettext("New publication"), to: publication_path(@conn, :new) %></span>
+<span><%= link gettext("Nueva publicación"), to: publication_path(@conn, :new), class: "btn btn-primary" %></span>

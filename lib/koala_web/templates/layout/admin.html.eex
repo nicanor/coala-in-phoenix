@@ -20,6 +20,7 @@
           <% end %>
           <ul class="nav nav-pills pull-right">
             <li><%= link "Sitio web", to: "/", target: "_blank" %></li>
+            <li><%= link "Categorías", to: category_path(@conn, :index) %></li>
             <li><%= link "Imágenes", to: image_path(@conn, :index) %></li>
           </ul>
         </nav>

@@ -7,3 +7,11 @@
   font-weight: bold;
   color: green;
 }
+
+.description-textarea {
+  min-height: 120px;
+}
+
+.content-textarea {
+  min-height: 800px;
+}

@@ -1,3 +1,4 @@
 <article class="content">
+  <h1><%= @publication.title %></h1>
   <%= @publication.content |> Earmark.as_html! |> raw %>
 </article>

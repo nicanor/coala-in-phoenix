@@ -1,0 +1,5 @@
+<h2>Editar categoría</h2>
+
+<%= render "form.html", Map.put(assigns, :action, category_path(@conn, :update, @category)) %>
+
+<span><%= link "Volver", to: category_path(@conn, :index), class: "btn btn-default" %></span>

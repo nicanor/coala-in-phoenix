@@ -7,13 +7,13 @@ defmodule KoalaWeb.PublicationController do
   alias Koala.CMS.Publication
 
   def index(conn, _params) do
-    publications = CMS.list_publications()
-    render(conn, "index.html", publications: publications)
+    categories = CMS.index()
+    render(conn, "index.html", categories: categories)
   end
 
   def new(conn, _params) do
     changeset = CMS.change_publication(%Publication{})
-    render(conn, "new.html", changeset: changeset)
+    render(conn, "new.html", changeset: changeset, categories: CMS.list_categories_for_select)
   end
 
   def create(conn, %{"publication" => publication_params}) do
@@ -23,19 +23,19 @@ defmodule KoalaWeb.PublicationController do
         |> put_flash(:info, "Publication created successfully.")
         |> redirect(to: publication_path(conn, :show, publication))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, categories: CMS.list_categories_for_select)
     end
   end
 
   def show(conn, %{"id" => id}) do
-    publication = CMS.get_publication!(id)
+    publication = CMS.get_publication_with_category!(id)
     render(conn, "show.html", publication: publication)
   end
 
   def edit(conn, %{"id" => id}) do
     publication = CMS.get_publication!(id)
     changeset = CMS.change_publication(publication)
-    render(conn, "edit.html", publication: publication, changeset: changeset)
+    render(conn, "edit.html", publication: publication, changeset: changeset, categories: CMS.list_categories_for_select)
   end
 
   def update(conn, %{"id" => id, "publication" => publication_params}) do
@@ -47,7 +47,7 @@ defmodule KoalaWeb.PublicationController do
         |> put_flash(:info, "Publication updated successfully.")
         |> redirect(to: publication_path(conn, :show, publication))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", publication: publication, changeset: changeset)
+        render(conn, "edit.html", publication: publication, changeset: changeset, categories: CMS.list_categories_for_select)
     end
   end
 
