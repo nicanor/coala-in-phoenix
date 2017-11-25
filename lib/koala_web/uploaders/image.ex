@@ -14,6 +14,10 @@ defmodule KoalaWeb.Image do
   end
 
   # Define a thumbnail transformation:
+  def transform(:original, _) do
+    {:convert, "-resize 700 -format jpg", :jpg}
+  end
+
   def transform(:thumb, _) do
     {:convert, "-strip -thumbnail 64x64^ -gravity center -extent 64x64 -format jpg", :jpg}
   end
@@ -24,7 +28,11 @@ defmodule KoalaWeb.Image do
 
   # Override the persisted filenames:
   def filename(version, {file, _scope}) do
-    file_name = Path.basename(file.file_name, Path.extname(file.file_name))
+    extension = Path.extname(file.file_name)
+    file_name =
+      file.file_name
+      |> Path.basename(extension)
+      |> Slugger.slugify_downcase()
     name(version, file_name)
   end
 

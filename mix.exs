@@ -43,7 +43,8 @@ defmodule Koala.Mixfile do
       {:cowboy, "~> 1.0"},
       {:earmark, "~> 1.2.2"},
       {:arc, "~> 0.8.0"},
-      {:arc_ecto, "~> 0.7.0"}
+      {:arc_ecto, "~> 0.7.0"},
+      {:slugger, "~> 0.2"}
     ]
   end
 

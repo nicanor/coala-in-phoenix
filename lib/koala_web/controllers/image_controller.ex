@@ -27,6 +27,12 @@ defmodule KoalaWeb.ImageController do
     end
   end
 
+  def create(conn, _) do
+    conn
+    |> put_flash(:info, "Debés seleccionar una imagen.")
+    |> new(conn)
+  end
+
   def show(conn, %{"id" => id}) do
     image = CMS.get_image!(id)
     render(conn, "show.html", image: image)
