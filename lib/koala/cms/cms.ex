@@ -10,13 +10,6 @@ defmodule Koala.CMS do
   alias Koala.CMS.Category
 
   @doc """
-  Returns valid page types
-  """
-  def valid_types do
-    Publication.valid_types
-  end
-
-  @doc """
   Returns the list of publications.
 
   ## Examples
@@ -30,22 +23,30 @@ defmodule Koala.CMS do
   end
 
   def public_publications do
-    query = from(p in Publication, where: p.public == true, select: struct(p, [:title, :slug, :type, :description]))
+    query = from(p in Publication, where: p.public == true, select: struct(p, [:title, :slug, :description]))
     Repo.all(query)
   end
 
-  def public_recipes do
-    public_publications("recipe")
-  end
-
-  def public_publications(type) do
-    query = from(p in Publication, where: [type: ^type, public: true], select: struct(p, [:title, :slug, :type, :description]))
+  def public_publications(category_id) do
+    query = from(p in Publication,
+            where: [public: true, category_id: ^category_id],
+            select: struct(p, [:title, :slug, :description]))
     Repo.all(query)
   end
 
   def index do
     query = from c in Category,
       join: p in assoc(c, :publications),
+      preload: [publications: p],
+      select: [:id, :name, :slug, publications: [:id, :category_id, :title, :slug]]
+    Repo.all query
+  end
+
+
+  def public_index do
+    query = from c in Category,
+      join: p in assoc(c, :publications),
+      where: p.public == true,
       preload: [publications: p],
       select: [:id, :name, :slug, publications: [:id, :category_id, :title, :slug]]
     Repo.all query
@@ -67,7 +68,6 @@ defmodule Koala.CMS do
   """
   def get_publication!(id) when is_integer(id), do: Repo.get!(Publication, id)
   def get_publication!(slug), do: Repo.get_by!(Publication, slug: slug)
-  def get_publication!(type, slug), do: Repo.get_by!(Publication, type: type, slug: slug)
 
   def get_publication_with_category!(slug) do
     query = from p in Publication,
@@ -76,6 +76,15 @@ defmodule Koala.CMS do
       where: p.slug == ^slug,
       preload: [category: c]
     Repo.one query
+  end
+
+  def list_publications_in_category!(category_slug) do
+    query = from p in Publication,
+      join: c in  Category,
+      on: p.category_id == c.id,
+      where: c.slug == ^category_slug,
+      preload: [category: c]
+    Repo.all query
   end
 
   @doc """
@@ -257,7 +266,8 @@ defmodule Koala.CMS do
       ** (Ecto.NoResultsError)
 
   """
-  def get_category!(id), do: Repo.get!(Category, id)
+  def get_category!(id) when is_integer(id), do: Repo.get!(Category, id)
+  def get_category!(slug), do: Repo.get_by!(Category, slug: slug)
 
   @doc """
   Creates a category.

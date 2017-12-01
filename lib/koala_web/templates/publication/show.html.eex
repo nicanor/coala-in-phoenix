@@ -8,7 +8,7 @@
   <dd><%= @publication.category.name %><dd>
 
   <dt><%= gettext("Slug") %></dt>
-  <dd><code><%= page_path(@conn, :show, @publication.category.slug, @publication) %></code><dd>
+  <dd><code><%= public_path(@conn, :show, @publication.category, @publication) %></code><dd>
 
   <dt><%= gettext("Description") %></dt>
   <dd><%= @publication.description %><dd>

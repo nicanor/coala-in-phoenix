@@ -13,12 +13,18 @@
   </div>
 </article>
 
+
+  <%= for category <- @categories do %>
 <section class="articles">
   <nav class="articles-inner">
-    <ul>
-      <%= for publication <- @publications do %>
-        <li><%= link publication.title, to: page_path(@conn, :show, path_for(publication.type), publication) %></li>
-      <% end %>
-    </ul>
+      <h2><%= category.name %></h2>
+      <p><%= category.description %></p>
+      <ul>
+        <%= for publication <- Enum.sort_by(category.publications, &(!&1.public)) do %>
+          <li><%= link publication.title, to: public_path(@conn, :show, category, publication) %></li>
+        <% end %>
+      </ul>
   </nav>
 </section>
+
+<% end %>

@@ -3,9 +3,7 @@ defmodule Koala.CMS.Publication do
   import Ecto.Changeset
   alias Koala.CMS.Publication
 
-  @valid_types ["article", "page", "recipe", "faq", "primary"]
   @derive {Phoenix.Param, key: :slug}
-
 
   schema "publications" do
     field :content, :string
@@ -15,7 +13,6 @@ defmodule Koala.CMS.Publication do
     field :publication_date, :date
     field :slug, :string
     field :title, :string
-    field :type, :string
     belongs_to :category, Koala.CMS.Category
 
     timestamps()
@@ -24,16 +21,11 @@ defmodule Koala.CMS.Publication do
   @doc false
   def changeset(%Publication{} = publication, attrs) do
     publication
-    |> cast(attrs, [:title, :slug, :type, :description, :content, :public, :publication_date, :facebook_path, :category_id])
+    |> cast(attrs, [:title, :slug, :description, :content, :public, :publication_date, :facebook_path, :category_id])
     |> add_slug
-    |> validate_required([:title, :slug, :type, :description, :content, :public, :publication_date, :facebook_path])
-    |> validate_inclusion(:type, valid_types())
+    |> validate_required([:title, :slug, :description, :content, :public, :publication_date])
     |> validate_format(:slug, ~r/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
     |> unique_constraint(:slug)
-  end
-
-  def valid_types do
-    @valid_types
   end
 
   def add_slug(%Ecto.Changeset{changes: %{title: title}} = changeset) do

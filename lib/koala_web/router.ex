@@ -18,14 +18,13 @@ defmodule KoalaWeb.Router do
     resources "/categories", CategoryController
     resources "/publications", PublicationController
     resources "/images", ImageController
-    get "/", PageController, :index
+    #get "/", PageController, :index
   end
 
   scope "/", KoalaWeb do
     pipe_through :browser
-    get "/sitemap", PageController, :sitemap
-    get "/:category_slug/:slug", PageController, :show
-    get "/", PageController, :index
+    get "/:category_slug/:publication_slug", PublicController, :show
+    get "/", PublicController, :index
   end
   # Other scopes may use custom stacks.
   # scope "/api", KoalaWeb do

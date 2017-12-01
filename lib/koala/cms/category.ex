@@ -3,6 +3,7 @@ defmodule Koala.CMS.Category do
   import Ecto.Changeset
   alias Koala.CMS.Category
 
+  @derive {Phoenix.Param, key: :slug}
 
   schema "categories" do
     field :description, :string
