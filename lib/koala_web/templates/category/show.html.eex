@@ -17,6 +17,15 @@
     <%= @category.description %>
   </li>
 
+  <li>
+    <strong>Publicaciones en esta categoría:</strong>
+    <ol>
+    <%= for publication <- @category.publications do %>
+    <li><%= publication.title %></li>
+    <% end %>
+    </ol>
+</li>
+
 </ul>
 
 <span><%= link "Editar", to: category_path(@conn, :edit, @category), class: "btn btn-primary" %></span>

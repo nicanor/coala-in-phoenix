@@ -28,7 +28,7 @@ defmodule KoalaWeb.CategoryController do
   end
 
   def show(conn, %{"id" => id}) do
-    category = CMS.get_category!(id)
+    category = CMS.get_category_with_publications(id)
     render(conn, "show.html", category: category)
   end
 

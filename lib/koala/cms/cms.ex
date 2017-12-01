@@ -36,12 +36,11 @@ defmodule Koala.CMS do
 
   def index do
     query = from c in Category,
-      join: p in assoc(c, :publications),
+      left_join: p in assoc(c, :publications),
       preload: [publications: p],
       select: [:id, :name, :slug, publications: [:id, :category_id, :title, :slug]]
     Repo.all query
   end
-
 
   def public_index do
     query = from c in Category,
@@ -76,15 +75,6 @@ defmodule Koala.CMS do
       where: p.slug == ^slug,
       preload: [category: c]
     Repo.one query
-  end
-
-  def list_publications_in_category!(category_slug) do
-    query = from p in Publication,
-      join: c in  Category,
-      on: p.category_id == c.id,
-      where: c.slug == ^category_slug,
-      preload: [category: c]
-    Repo.all query
   end
 
   @doc """
@@ -268,6 +258,14 @@ defmodule Koala.CMS do
   """
   def get_category!(id) when is_integer(id), do: Repo.get!(Category, id)
   def get_category!(slug), do: Repo.get_by!(Category, slug: slug)
+  def get_category_with_publications(slug) do
+    query = from c in Category,
+              left_join: p in Publication,
+              on: p.category_id == c.id,
+              where: c.slug == ^slug,
+              preload: [publications: p]
+    Repo.one query
+  end
 
   @doc """
   Creates a category.
