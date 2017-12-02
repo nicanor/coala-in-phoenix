@@ -2,4 +2,4 @@
 
 <%= render "form.html", Map.put(assigns, :action, category_path(@conn, :update, @category)) %>
 
-<span><%= link "Volver", to: category_path(@conn, :index), class: "btn btn-default" %></span>
+<span><%= link "Volver", to: publication_path(@conn, :index), class: "btn btn-default" %></span>

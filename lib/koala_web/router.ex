@@ -15,7 +15,7 @@ defmodule KoalaWeb.Router do
 
   scope "/admin", KoalaWeb do
     pipe_through :browser
-    resources "/categories", CategoryController
+    resources "/categories", CategoryController, except: [:index]
     resources "/publications", PublicationController
     resources "/images", ImageController
   end

@@ -5,20 +5,18 @@
     <tr>
       <th><%= gettext("Title") %></th>
       <th><%= gettext("Public") %></th>
-
       <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for category <- @categories do %>
-<tr>
-  <th><%= category.name %></th>
-  <th></th>
+  <tr class="category">
+    <th><%= link category.name, to: category_path(@conn, :show, category)  %></th>
+    <th></th>
+    <th></th>
+  </tr>
 
-  <th></th>
-</tr>
-
-<%= for publication <- Enum.sort_by(category.publications, &(!&1.public)) do %>
+  <%= for publication <- Enum.sort_by(category.publications, &(!&1.public)) do %>
     <tr>
       <td><%= publication.title %></td>
       <td><%= tick(publication.public) %></td>
@@ -30,7 +28,7 @@
           method: :delete, data: [confirm: gettext("Are you sure?")], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>
-<% end %>
+  <% end %>
 
 <% end %>
 
@@ -38,3 +36,4 @@
 </table>
 
 <span><%= link gettext("Nueva publicación"), to: publication_path(@conn, :new), class: "btn btn-primary" %></span>
+<span><%= link gettext("Nueva categoría"), to: category_path(@conn, :new), class: "btn btn-primary" %></span>

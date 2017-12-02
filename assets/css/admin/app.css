@@ -15,3 +15,7 @@
 .content-textarea {
   min-height: 800px;
 }
+
+tr.category {
+  background-color: #eee;
+}

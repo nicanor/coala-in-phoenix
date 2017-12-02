@@ -29,4 +29,7 @@
 </ul>
 
 <span><%= link "Editar", to: category_path(@conn, :edit, @category), class: "btn btn-primary" %></span>
-<span><%= link "Volver", to: category_path(@conn, :index), class: "btn btn-default" %></span>
+<span><%= link "Volver", to: publication_path(@conn, :index), class: "btn btn-default" %></span>
+<%= if Enum.empty?(@category.publications) do %>
+<span><%= link "Eliminar", to: category_path(@conn, :delete, @category), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger" %></span>
+<% end %>

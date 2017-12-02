@@ -6,11 +6,6 @@ defmodule KoalaWeb.CategoryController do
   alias Koala.CMS
   alias Koala.CMS.Category
 
-  def index(conn, _params) do
-    categories = CMS.list_categories()
-    render(conn, "index.html", categories: categories)
-  end
-
   def new(conn, _params) do
     changeset = CMS.change_category(%Category{})
     render(conn, "new.html", changeset: changeset)
@@ -57,6 +52,6 @@ defmodule KoalaWeb.CategoryController do
 
     conn
     |> put_flash(:info, "Category deleted successfully.")
-    |> redirect(to: category_path(conn, :index))
+    |> redirect(to: publication_path(conn, :index))
   end
 end
