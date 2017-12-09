@@ -10,26 +10,35 @@ msgid ""
 msgstr ""
 "Language: es_AR\n"
 
-#: lib/koala_web/templates/publication/edit.html.eex:5
-#: lib/koala_web/templates/publication/new.html.eex:5
-#: lib/koala_web/templates/publication/show.html.eex:49
+#: lib/koala_web/templates/publication/form.html.eex:52
+#: lib/koala_web/templates/publication/show.html.eex:28
+#: lib/koala_web/templates/user/edit.html.eex:5
+#: lib/koala_web/templates/user/new.html.eex:5
+#: lib/koala_web/templates/user/show.html.eex:23
 msgid "Back"
 msgstr "Volver"
 
-#: lib/koala_web/views/publication_view.ex:21
+#: lib/koala_web/views/publication_view.ex:4
 msgid "yes"
 msgstr "Sí"
 
-#: lib/koala_web/templates/publication/index.html.eex:24
+#: lib/koala_web/templates/category/index.html.eex:21
+#: lib/koala_web/templates/publication/index.html.eex:28
+#: lib/koala_web/templates/user/index.html.eex:21
 msgid "Are you sure?"
 msgstr "¿Estás seguro?"
 
-#: lib/koala_web/templates/publication/index.html.eex:23
+#: lib/koala_web/templates/category/index.html.eex:21
+#: lib/koala_web/templates/publication/index.html.eex:27
+#: lib/koala_web/templates/user/index.html.eex:21
 msgid "Delete"
 msgstr "Eliminar"
 
-#: lib/koala_web/templates/publication/index.html.eex:22
-#: lib/koala_web/templates/publication/show.html.eex:48
+#: lib/koala_web/templates/category/index.html.eex:20
+#: lib/koala_web/templates/publication/index.html.eex:26
+#: lib/koala_web/templates/publication/show.html.eex:27
+#: lib/koala_web/templates/user/index.html.eex:20
+#: lib/koala_web/templates/user/show.html.eex:22
 msgid "Edit"
 msgstr "Editar"
 
@@ -37,50 +46,84 @@ msgstr "Editar"
 msgid "Listing publications"
 msgstr "Lista de publicaciones"
 
-#: lib/koala_web/templates/publication/index.html.eex:31
+#: lib/koala_web/templates/publication/index.html.eex:38
 #: lib/koala_web/templates/publication/new.html.eex:1
 msgid "New publication"
 msgstr "Nueva publicación"
 
-#: lib/koala_web/templates/publication/form.html.eex:39
-#: lib/koala_web/templates/publication/index.html.eex:8
+#: lib/koala_web/templates/publication/form.html.eex:33
+#: lib/koala_web/templates/publication/index.html.eex:7
+#: lib/koala_web/templates/publication/show.html.eex:16
 msgid "Public"
 msgstr "Público"
 
-#: lib/koala_web/templates/publication/index.html.eex:21
+#: lib/koala_web/templates/category/index.html.eex:19
+#: lib/koala_web/templates/publication/index.html.eex:25
+#: lib/koala_web/templates/user/index.html.eex:19
 msgid "Show"
 msgstr "Ver"
 
 #: lib/koala_web/templates/publication/form.html.eex:15
 #: lib/koala_web/templates/publication/index.html.eex:6
+#: lib/koala_web/templates/publication/show.html.eex:4
 msgid "Title"
 msgstr "Título"
 
-#: lib/koala_web/templates/publication/form.html.eex:9
-#: lib/koala_web/templates/publication/index.html.eex:7
-msgid "Type"
-msgstr "Tipo"
-
-#: lib/koala_web/templates/publication/form.html.eex:33
+#: lib/koala_web/templates/publication/form.html.eex:27
 msgid "Content"
 msgstr "Contenido"
 
-#: lib/koala_web/templates/publication/form.html.eex:27
+#: lib/koala_web/templates/category/form.html.eex:15
+#: lib/koala_web/templates/publication/form.html.eex:21
+#: lib/koala_web/templates/publication/show.html.eex:13
 msgid "Description"
 msgstr "Descripción"
 
-#: lib/koala_web/templates/publication/form.html.eex:51
+#: lib/koala_web/templates/publication/form.html.eex:45
+#: lib/koala_web/templates/publication/show.html.eex:22
 msgid "Facebook path"
 msgstr "Link a Facebook"
 
-#: lib/koala_web/templates/publication/form.html.eex:45
+#: lib/koala_web/templates/publication/form.html.eex:39
+#: lib/koala_web/templates/publication/show.html.eex:19
 msgid "Publication date"
 msgstr "Fecha de publicación"
 
-#: lib/koala_web/templates/publication/form.html.eex:57
+#: lib/koala_web/templates/category/form.html.eex:21
+#: lib/koala_web/templates/publication/form.html.eex:51
 msgid "Submit"
 msgstr "Guardar"
 
-#: lib/koala_web/templates/publication/form.html.eex:21
+#: lib/koala_web/templates/publication/show.html.eex:10
 msgid "Slug"
 msgstr "Dirección URI"
+
+#: lib/koala_web/templates/publication/form.html.eex:9
+#: lib/koala_web/templates/publication/show.html.eex:7
+msgid "Category"
+msgstr "Categoría"
+
+#: lib/koala_web/templates/user/edit.html.eex:1
+msgid "Edit user"
+msgstr "Editar usuario"
+
+#: lib/koala_web/templates/user/index.html.eex:1
+msgid "Listing users"
+msgstr "Listado de usuarios"
+
+#: lib/koala_web/templates/category/form.html.eex:9
+msgid "Name"
+msgstr "Nombre"
+
+#: lib/koala_web/templates/publication/index.html.eex:39
+msgid "New category"
+msgstr "Nueva categoría"
+
+#: lib/koala_web/templates/user/index.html.eex:28
+#: lib/koala_web/templates/user/new.html.eex:1
+msgid "New user"
+msgstr "Nuevo usuario"
+
+#: lib/koala_web/templates/user/show.html.eex:1
+msgid "Show user"
+msgstr "Ver usuario"

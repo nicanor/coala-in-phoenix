@@ -41,7 +41,7 @@ defmodule KoalaWeb.Image do
   defp name(version, file_name), do: "#{version}-#{file_name}"
 
   # Override the storage directory:
-  def storage_dir(version, {file, scope}) do
+  def storage_dir(_version, {_file, _scope}) do
     "img/"
   end
 

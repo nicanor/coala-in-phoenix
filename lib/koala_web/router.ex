@@ -18,6 +18,7 @@ defmodule KoalaWeb.Router do
     resources "/categories", CategoryController, except: [:index]
     resources "/publications", PublicationController
     resources "/images", ImageController
+    resources "/users", UserController
   end
 
   scope "/", KoalaWeb do

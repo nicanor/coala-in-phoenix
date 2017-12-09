@@ -35,5 +35,5 @@
   </tbody>
 </table>
 
-<span><%= link gettext("Nueva publicación"), to: publication_path(@conn, :new), class: "btn btn-primary" %></span>
-<span><%= link gettext("Nueva categoría"), to: category_path(@conn, :new), class: "btn btn-primary" %></span>
+<span><%= link gettext("New publication"), to: publication_path(@conn, :new), class: "btn btn-primary" %></span>
+<span><%= link gettext("New category"), to: category_path(@conn, :new), class: "btn btn-primary" %></span>
