@@ -74,7 +74,7 @@ defmodule Koala.CMS do
       on: p.category_id == c.id,
       where: p.slug == ^slug,
       preload: [category: c]
-    Repo.one query
+    Repo.one!(query)
   end
 
   @doc """
@@ -258,13 +258,13 @@ defmodule Koala.CMS do
   """
   def get_category!(id) when is_integer(id), do: Repo.get!(Category, id)
   def get_category!(slug), do: Repo.get_by!(Category, slug: slug)
-  def get_category_with_publications(slug) do
+  def get_category_with_publications!(slug) do
     query = from c in Category,
               left_join: p in Publication,
               on: p.category_id == c.id,
               where: c.slug == ^slug,
               preload: [publications: p]
-    Repo.one query
+    Repo.one! query
   end
 
   @doc """

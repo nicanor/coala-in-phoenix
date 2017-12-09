@@ -20,7 +20,7 @@ defmodule KoalaWeb.ImageControllerTest do
   describe "new image" do
     test "renders form", %{conn: conn} do
       conn = get conn, image_path(conn, :new)
-      assert html_response(conn, 200) =~ "New Image"
+      assert html_response(conn, 200) =~ "Nueva imagen"
     end
   end
 
@@ -37,7 +37,7 @@ defmodule KoalaWeb.ImageControllerTest do
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post conn, image_path(conn, :create), image: @invalid_attrs
-      assert html_response(conn, 200) =~ "New Image"
+      assert html_response(conn, 200) =~ "Nueva imagen"
     end
   end
 

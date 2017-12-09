@@ -3,12 +3,15 @@ defmodule KoalaWeb.PublicationControllerTest do
 
   alias Koala.CMS
 
-  @create_attrs %{content: "some content", description: "some description", facebook_path: "some facebook_path", public: true, publication_date: ~D[2010-04-17], slug: "some-slug", title: "some title", type: "page"}
-  @update_attrs %{content: "some updated content", description: "some updated description", facebook_path: "some updated facebook_path", public: false, publication_date: ~D[2011-05-18], slug: "some-updated-slug", title: "some updated title", type: "recipe"}
-  @invalid_attrs %{content: nil, description: nil, facebook_path: nil, public: nil, publication_date: nil, slug: nil, title: nil, type: nil}
+  @category_create_attrs %{description: "some description", name: "some name"}
+
+  @create_attrs %{content: "some content", description: "some description", facebook_path: "some facebook_path", public: true, publication_date: ~D[2010-04-17], title: "some title"}
+  @update_attrs %{content: "some updated content", description: "some updated description", facebook_path: "some updated facebook_path", public: false, publication_date: ~D[2011-05-18], title: "some updated title"}
+  @invalid_attrs %{content: nil, description: nil, facebook_path: nil, public: nil, publication_date: nil, title: nil}
 
   def fixture(:publication) do
-    {:ok, publication} = CMS.create_publication(@create_attrs)
+    {:ok, category} = CMS.create_category(@category_create_attrs)
+    {:ok, publication} = CMS.create_publication(Map.put(@create_attrs, :category_id, category.id))
     publication
   end
 
@@ -28,10 +31,11 @@ defmodule KoalaWeb.PublicationControllerTest do
 
   describe "create publication" do
     test "redirects to show when data is valid", %{conn: conn} do
-      conn = post conn, publication_path(conn, :create), publication: @create_attrs
-
+      {:ok, category} = CMS.create_category(@category_create_attrs)
+      conn = post conn, publication_path(conn, :create), publication: Map.put(@create_attrs, :category_id, category.id)
       assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == publication_path(conn, :show, id)
+      publication = CMS.get_publication!(id)
+      assert redirected_to(conn) == publication_path(conn, :show, publication)
 
       conn = get conn, publication_path(conn, :show, id)
       assert html_response(conn, 200) =~ "Publicación"

@@ -6,9 +6,9 @@ defmodule Koala.CMSTest do
   describe "publications" do
     alias Koala.CMS.Publication
 
-    @valid_attrs %{content: "some content", description: "some description", facebook_path: "some facebook_path", public: true, publication_date: ~D[2010-04-17], slug: "some-slug", title: "some title", type: "page"}
-    @update_attrs %{content: "some updated content", description: "some updated description", facebook_path: "some updated facebook_path", public: false, publication_date: ~D[2011-05-18], slug: "some-updated-slug", title: "some updated title", type: "recipe"}
-    @invalid_attrs %{content: nil, description: nil, facebook_path: nil, public: nil, publication_date: nil, slug: nil, title: nil, type: nil}
+    @valid_attrs %{content: "some content", description: "some description", facebook_path: "some facebook_path", public: true, publication_date: ~D[2010-04-17], title: "some title"}
+    @update_attrs %{content: "some updated content", description: "some updated description", facebook_path: "some updated facebook_path", public: false, publication_date: ~D[2011-05-18], title: "some updated title"}
+    @invalid_attrs %{content: nil, description: nil, facebook_path: nil, public: nil, publication_date: nil,  title: nil}
 
     def publication_fixture(attrs \\ %{}) do
       {:ok, publication} =
@@ -17,10 +17,6 @@ defmodule Koala.CMSTest do
         |> CMS.create_publication()
 
       publication
-    end
-
-    test "valid_types/0 returns all valid_types" do
-      assert CMS.valid_types() == Publication.valid_types()
     end
 
     test "list_publications/0 returns all publications" do
@@ -40,9 +36,8 @@ defmodule Koala.CMSTest do
       assert publication.facebook_path == "some facebook_path"
       assert publication.public == true
       assert publication.publication_date == ~D[2010-04-17]
-      assert publication.slug == "some-slug"
+      assert publication.slug == "some-title"
       assert publication.title == "some title"
-      assert publication.type == "page"
     end
 
     test "create_publication/1 with invalid data returns error changeset" do
@@ -58,9 +53,8 @@ defmodule Koala.CMSTest do
       assert publication.facebook_path == "some updated facebook_path"
       assert publication.public == false
       assert publication.publication_date == ~D[2011-05-18]
-      assert publication.slug == "some-updated-slug"
+      assert publication.slug == "some-updated-title"
       assert publication.title == "some updated title"
-      assert publication.type == "recipe"
     end
 
     test "update_publication/2 with invalid data returns error changeset" do

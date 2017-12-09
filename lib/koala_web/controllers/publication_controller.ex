@@ -27,8 +27,8 @@ defmodule KoalaWeb.PublicationController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    publication = CMS.get_publication_with_category!(id)
+  def show(conn, %{"id" => slug}) do
+    publication = CMS.get_publication_with_category!(slug)
     render(conn, "show.html", publication: publication)
   end
 

@@ -26,6 +26,7 @@ defmodule Koala.CMS.Publication do
     |> validate_required([:title, :slug, :description, :content, :public, :publication_date])
     |> validate_format(:slug, ~r/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
     |> unique_constraint(:slug)
+    |> foreign_key_constraint(:category_id)
   end
 
   def add_slug(%Ecto.Changeset{changes: %{title: title}} = changeset) do

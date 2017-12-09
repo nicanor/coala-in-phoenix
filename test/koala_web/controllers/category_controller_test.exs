@@ -12,13 +12,6 @@ defmodule KoalaWeb.CategoryControllerTest do
     category
   end
 
-  describe "index" do
-    test "lists all categories", %{conn: conn} do
-      conn = get conn, category_path(conn, :index)
-      assert html_response(conn, 200) =~ "Listado de categorías"
-    end
-  end
-
   describe "new category" do
     test "renders form", %{conn: conn} do
       conn = get conn, category_path(conn, :new)
@@ -57,6 +50,8 @@ defmodule KoalaWeb.CategoryControllerTest do
 
     test "redirects when data is valid", %{conn: conn, category: category} do
       conn = put conn, category_path(conn, :update, category), category: @update_attrs
+      category = CMS.get_category!(category.id) # To have updated slug.
+
       assert redirected_to(conn) == category_path(conn, :show, category)
 
       conn = get conn, category_path(conn, :show, category)
@@ -74,7 +69,7 @@ defmodule KoalaWeb.CategoryControllerTest do
 
     test "deletes chosen category", %{conn: conn, category: category} do
       conn = delete conn, category_path(conn, :delete, category)
-      assert redirected_to(conn) == category_path(conn, :index)
+      assert redirected_to(conn) == publication_path(conn, :index)
       assert_error_sent 404, fn ->
         get conn, category_path(conn, :show, category)
       end

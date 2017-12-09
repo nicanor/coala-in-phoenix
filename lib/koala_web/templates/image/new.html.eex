@@ -1,4 +1,4 @@
-<h2>Nueva imágen</h2>
+<h2>Nueva imagen</h2>
 
 <%= form_for @changeset, image_path(@conn, :create), [multipart: true], fn f -> %>
   <%= if @changeset.action do %>
@@ -8,7 +8,7 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :image, "Imágen", class: "control-label" %>
+    <%= label f, :image, "Imagen", class: "control-label" %>
     <%= file_input f, :image, class: "form-control" %>
 
     <%= error_tag f, :image %>

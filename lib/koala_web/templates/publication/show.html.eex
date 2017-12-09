@@ -28,4 +28,5 @@
 <span><%= link gettext("Back"), to: publication_path(@conn, :index), class: "btn btn-default" %></span>
 <hr />
 
+<h1><%= @publication.title %></h1>
 <%= @publication.content |> Earmark.as_html! |> raw %>
