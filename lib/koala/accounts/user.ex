@@ -3,7 +3,6 @@ defmodule Koala.Accounts.User do
   import Ecto.Changeset
   alias Koala.Accounts.User
 
-
   schema "users" do
     field :email, :string
     field :role, :string
@@ -18,6 +17,7 @@ defmodule Koala.Accounts.User do
     user
     |> cast(attrs, [:email, :crypted_password, :role])
     |> validate_required([:email, :crypted_password, :role])
+    |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
   end
 end

@@ -6,8 +6,8 @@ defmodule Koala.AccountsTest do
   describe "users" do
     alias Koala.Accounts.User
 
-    @valid_attrs %{crypted_password: "some crypted_password", email: "some email", role: "some role"}
-    @update_attrs %{crypted_password: "some updated crypted_password", email: "some updated email", role: "some updated role"}
+    @valid_attrs %{crypted_password: "some crypted_password", email: "some@email.com", role: "some role"}
+    @update_attrs %{crypted_password: "some updated crypted_password", email: "some.updated@email.com", role: "some updated role"}
     @invalid_attrs %{crypted_password: nil, email: nil, role: nil}
 
     def user_fixture(attrs \\ %{}) do
@@ -32,7 +32,7 @@ defmodule Koala.AccountsTest do
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
       assert user.crypted_password == "some crypted_password"
-      assert user.email == "some email"
+      assert user.email == "some@email.com"
       assert user.role == "some role"
     end
 
@@ -45,7 +45,7 @@ defmodule Koala.AccountsTest do
       assert {:ok, user} = Accounts.update_user(user, @update_attrs)
       assert %User{} = user
       assert user.crypted_password == "some updated crypted_password"
-      assert user.email == "some updated email"
+      assert user.email == "some.updated@email.com"
       assert user.role == "some updated role"
     end
 

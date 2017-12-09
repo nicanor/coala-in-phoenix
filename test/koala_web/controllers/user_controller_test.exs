@@ -3,8 +3,8 @@ defmodule KoalaWeb.UserControllerTest do
 
   alias Koala.Accounts
 
-  @create_attrs %{crypted_password: "some crypted_password", email: "some email", role: "some role"}
-  @update_attrs %{crypted_password: "some updated crypted_password", email: "some updated email", role: "some updated role"}
+  @create_attrs %{crypted_password: "some crypted_password", email: "some@email.com", role: "some role"}
+  @update_attrs %{crypted_password: "some updated crypted_password", email: "some.updated@email.com", role: "some updated role"}
   @invalid_attrs %{crypted_password: nil, email: nil, role: nil}
 
   def fixture(:user) do
