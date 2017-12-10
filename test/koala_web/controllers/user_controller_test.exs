@@ -3,9 +3,9 @@ defmodule KoalaWeb.UserControllerTest do
 
   alias Koala.Accounts
 
-  @create_attrs %{crypted_password: "some crypted_password", email: "some@email.com", role: "some role"}
-  @update_attrs %{crypted_password: "some updated crypted_password", email: "some.updated@email.com", role: "some updated role"}
-  @invalid_attrs %{crypted_password: nil, email: nil, role: nil}
+  @create_attrs %{password: "some-password", password_confirmation: "some-password", email: "some@email.com", role: "editor"}
+  @update_attrs %{password: "some-updated-password", password_confirmation: "some-updated-password", email: "some.updated@email.com", role: "admin"}
+  @invalid_attrs %{password: nil, password_confirmation: nil, email: nil, role: nil}
 
   def fixture(:user) do
     {:ok, user} = Accounts.create_user(@create_attrs)
@@ -60,7 +60,7 @@ defmodule KoalaWeb.UserControllerTest do
       assert redirected_to(conn) == user_path(conn, :show, user)
 
       conn = get conn, user_path(conn, :show, user)
-      assert html_response(conn, 200) =~ "some updated crypted_password"
+      assert html_response(conn, 200) =~ "some.updated@email.com"
     end
 
     test "renders errors when data is invalid", %{conn: conn, user: user} do

@@ -6,9 +6,9 @@ defmodule Koala.AccountsTest do
   describe "users" do
     alias Koala.Accounts.User
 
-    @valid_attrs %{crypted_password: "some crypted_password", email: "some@email.com", role: "some role"}
-    @update_attrs %{crypted_password: "some updated crypted_password", email: "some.updated@email.com", role: "some updated role"}
-    @invalid_attrs %{crypted_password: nil, email: nil, role: nil}
+    @valid_attrs %{password: "some-password", password_confirmation: "some-password", email: "some@email.com", role: "editor"}
+    @update_attrs %{password: "some-updated-password", password_confirmation: "some-updated-password", email: "some.updated@email.com", role: "admin"}
+    @invalid_attrs %{password: nil, password_confirmation: nil, email: nil, role: nil}
 
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =
@@ -20,20 +20,26 @@ defmodule Koala.AccountsTest do
     end
 
     test "list_users/0 returns all users" do
-      user = user_fixture()
+      user =
+        user_fixture()
+        |> Map.replace(:password, nil)
+        |> Map.replace(:password_confirmation, nil)
       assert Accounts.list_users() == [user]
     end
 
     test "get_user!/1 returns the user with given id" do
-      user = user_fixture()
+      user =
+        user_fixture()
+        |> Map.replace(:password, nil)
+        |> Map.replace(:password_confirmation, nil)
       assert Accounts.get_user!(user.id) == user
     end
 
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      assert user.crypted_password == "some crypted_password"
       assert user.email == "some@email.com"
-      assert user.role == "some role"
+      assert user.role == "editor"
+      assert user.password == "some-password"
     end
 
     test "create_user/1 with invalid data returns error changeset" do
@@ -44,14 +50,18 @@ defmodule Koala.AccountsTest do
       user = user_fixture()
       assert {:ok, user} = Accounts.update_user(user, @update_attrs)
       assert %User{} = user
-      assert user.crypted_password == "some updated crypted_password"
       assert user.email == "some.updated@email.com"
-      assert user.role == "some updated role"
+      assert user.role == "admin"
+      assert user.password == "some-updated-password"
     end
 
     test "update_user/2 with invalid data returns error changeset" do
       user = user_fixture()
       assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, @invalid_attrs)
+      user =
+        user
+        |> Map.replace(:password, nil)
+        |> Map.replace(:password_confirmation, nil)
       assert user == Accounts.get_user!(user.id)
     end
 

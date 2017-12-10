@@ -44,7 +44,9 @@ defmodule Koala.Mixfile do
       {:earmark, "~> 1.2.2"},
       {:arc, "~> 0.8.0"},
       {:arc_ecto, "~> 0.7.0"},
-      {:slugger, "~> 0.2"}
+      {:slugger, "~> 0.2"},
+      {:comeonin, "~> 4.0"},
+      {:bcrypt_elixir, "~> 1.0"}
     ]
   end
 
