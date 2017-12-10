@@ -3,9 +3,11 @@ defmodule Koala.Accounts.User do
   import Ecto.Changeset
   alias Koala.Accounts.User
 
+  @valid_roles ["admin", "editor", "guest"]
+
   schema "users" do
     field :email, :string
-    field :role, :string
+    field :role, :string, default: "guest"
     field :crypted_password, :string
 
     field :password, :string, virtual: true
@@ -20,6 +22,7 @@ defmodule Koala.Accounts.User do
     |> cast(attrs, [:email, :password, :password_confirmation, :role])
     |> validate_required([:email, :role])
     |> validate_format(:email, ~r/@/)
+    |> validate_inclusion(:role, @valid_roles)
     |> hash_password
     |> unique_constraint(:email)
   end
