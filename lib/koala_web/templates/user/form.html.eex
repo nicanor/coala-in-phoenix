@@ -12,14 +12,20 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :crypted_password, class: "control-label" %>
-    <%= text_input f, :crypted_password, class: "form-control" %>
-    <%= error_tag f, :crypted_password %>
+    <%= label f, :password, class: "control-label" %>
+    <%= password_input f, :password, class: "form-control" %>
+    <%= error_tag f, :password %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :password_confirmation, class: "control-label" %>
+    <%= password_input f, :password_confirmation, class: "form-control" %>
+    <%= error_tag f, :password_confirmation %>
   </div>
 
   <div class="form-group">
     <%= label f, :role, class: "control-label" %>
-    <%= text_input f, :role, class: "form-control" %>
+    <%= select f, :role, valid_roles(), class: "form-control" %>
     <%= error_tag f, :role %>
   </div>
 
