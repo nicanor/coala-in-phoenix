@@ -22,20 +22,15 @@ defmodule Koala.CMS do
     Repo.all(Publication)
   end
 
-  defp public_query do
-    from(
-      Publication,
-      where: [public: true],
-      select: [:title, :slug, :description]
-    )
-  end
-
   def public_publications do
-    Repo.all(public_query)
+    Publication
+    |> where([public: true])
+    |> Repo.all()
   end
 
   def public_publications(category_id) do
-    public_query
+    Publication
+    |> where([public: true])
     |> where([category_id: ^category_id])
     |> Repo.all()
   end

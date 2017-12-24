@@ -20,7 +20,7 @@ defmodule KoalaWeb.RegistrationController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User created successfully.")
-        |> redirect(to: Helpers.registration_path(conn, :success))
+        |> redirect(to: registration_path(conn, :success))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "register.html", changeset: changeset)
