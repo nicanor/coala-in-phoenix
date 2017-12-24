@@ -1,0 +1,3 @@
+<h2><%= gettext("Conglaturations! You have registered successfully!") %></h2>
+
+<%= link gettext("Back"), to: public_path(@conn, :index), class: "btn btn-default" %>

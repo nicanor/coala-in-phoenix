@@ -18,11 +18,17 @@ defmodule KoalaWeb.Router do
     resources "/categories", CategoryController, except: [:index]
     resources "/publications", PublicationController
     resources "/images", ImageController
-    resources "/users", UserController
+    resources "/users", UserController, only: [:index, :edit, :update, :delete]
   end
 
   scope "/", KoalaWeb do
     pipe_through :browser
+    get "/login", AuthController, :new
+    post "/login", AuthController, :create
+    delete "/logout", AuthController, :delete
+    get "/registrarme", RegistrationController, :register
+    get "/registro_exitoso", RegistrationController, :success
+    post "/registrarme", RegistrationController, :create
     get "/:category_slug/:publication_slug", PublicController, :show
     get "/", PublicController, :index
   end

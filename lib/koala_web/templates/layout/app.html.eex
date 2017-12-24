@@ -29,6 +29,7 @@
     <footer class="footer">
       <div class="footer-inner" style='text-align:center;'>
         <p>Created by <a href="/">Nicanor Perera</a>.</p>
+        <p><%= link 'Registrarme', to: registration_path(@conn, :register) %></p>
         <p><%= link 'Admin Publicaciones', to: publication_path(@conn, :index) %></p>
       </div>
     </footer>

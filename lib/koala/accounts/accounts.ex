@@ -4,10 +4,27 @@ defmodule Koala.Accounts do
   """
 
   import Ecto.Query, warn: false
+  import Comeonin.Bcrypt, only: [checkpw: 2, dummy_checkpw: 0]
+
   alias Koala.Repo
 
   alias Koala.Accounts.User
+  alias Koala.Accounts.Registration
 
+
+  def authenticate(email, password)do
+    user = Repo.get_by(User, email: email)
+
+    cond do
+      user && checkpw(password, user.crypted_password) ->
+        {:ok, user}
+      user ->
+        {:error, :unauthorized}
+      true ->
+        dummy_checkpw
+        {:error, :not_found}
+    end
+  end
   @doc """
   Returns the list of users.
 
@@ -51,7 +68,7 @@ defmodule Koala.Accounts do
   """
   def create_user(attrs \\ %{}) do
     %User{}
-    |> User.changeset(attrs)
+    |> Registration.changeset(attrs)
     |> Repo.insert()
   end
 

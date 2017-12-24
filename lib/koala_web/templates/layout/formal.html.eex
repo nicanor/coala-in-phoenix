@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" type="image/png" href="/favicon.png" >
 
-    <title>Administración - Coala</title>
+    <title>Coala</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/admin.css") %>">
   </head>
 
@@ -16,15 +16,9 @@
     <div class="container">
       <header class="header">
         <nav role="navigation">
-          <%= link to: publication_path(@conn, :index) do %>
+          <%= link to: public_path(@conn, :index) do %>
             <%= img_tag("/images/logo-verde.png", class: "logo") %>
           <% end %>
-          <ul class="nav nav-pills pull-right">
-            <li><%= link "Sitio web", to: "/", target: "_blank" %></li>
-            <li><%= link "Imágenes", to: image_path(@conn, :index) %></li>
-            <li><%= link "Usuarios", to: user_path(@conn, :index) %></li>
-            <li><%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %></li>
-          </ul>
         </nav>
         <span class="logo"></span>
       </header>
