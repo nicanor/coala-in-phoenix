@@ -11,20 +11,22 @@ defmodule Koala.Accounts do
   alias Koala.Accounts.User
   alias Koala.Accounts.Registration
 
-
-  def authenticate(email, password)do
+  def authenticate(email, password) do
     user = Repo.get_by(User, email: email)
 
     cond do
       user && checkpw(password, user.crypted_password) ->
         {:ok, user}
+
       user ->
         {:error, :unauthorized}
+
       true ->
         dummy_checkpw
         {:error, :not_found}
     end
   end
+
   @doc """
   Returns the list of users.
 

@@ -6,8 +6,18 @@ defmodule Koala.AccountsTest do
   describe "users" do
     alias Koala.Accounts.User
 
-    @valid_attrs %{password: "some-password", password_confirmation: "some-password", email: "some@email.com", role: "editor"}
-    @update_attrs %{password: "some-updated-password", password_confirmation: "some-updated-password", email: "some.updated@email.com", role: "admin"}
+    @valid_attrs %{
+      password: "some-password",
+      password_confirmation: "some-password",
+      email: "some@email.com",
+      role: "editor"
+    }
+    @update_attrs %{
+      password: "some-updated-password",
+      password_confirmation: "some-updated-password",
+      email: "some.updated@email.com",
+      role: "admin"
+    }
     @invalid_attrs %{password: nil, password_confirmation: nil, email: nil, role: nil}
 
     def user_fixture(attrs \\ %{}) do
@@ -24,6 +34,7 @@ defmodule Koala.AccountsTest do
         user_fixture()
         |> Map.replace(:password, nil)
         |> Map.replace(:password_confirmation, nil)
+
       assert Accounts.list_users() == [user]
     end
 
@@ -32,6 +43,7 @@ defmodule Koala.AccountsTest do
         user_fixture()
         |> Map.replace(:password, nil)
         |> Map.replace(:password_confirmation, nil)
+
       assert Accounts.get_user!(user.id) == user
     end
 
@@ -58,10 +70,12 @@ defmodule Koala.AccountsTest do
     test "update_user/2 with invalid data returns error changeset" do
       user = user_fixture()
       assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, @invalid_attrs)
+
       user =
         user
         |> Map.replace(:password, nil)
         |> Map.replace(:password_confirmation, nil)
+
       assert user == Accounts.get_user!(user.id)
     end
 

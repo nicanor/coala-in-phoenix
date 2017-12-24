@@ -6,12 +6,12 @@ defmodule Koala.Accounts.User do
   @valid_roles ["admin", "editor", "guest"]
 
   schema "users" do
-    field :email, :string
-    field :role, :string, default: "guest"
-    field :crypted_password, :string
+    field(:email, :string)
+    field(:role, :string, default: "guest")
+    field(:crypted_password, :string)
 
-    field :password, :string, virtual: true
-    field :password_confirmation, :string, virtual: true
+    field(:password, :string, virtual: true)
+    field(:password_confirmation, :string, virtual: true)
 
     timestamps()
   end
@@ -25,5 +25,4 @@ defmodule Koala.Accounts.User do
     |> validate_inclusion(:role, @valid_roles)
     |> unique_constraint(:email)
   end
-
 end

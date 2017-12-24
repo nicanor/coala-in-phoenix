@@ -1,7 +1,7 @@
 defmodule KoalaWeb.RegistrationController do
   use KoalaWeb, :controller
 
-  plug :put_layout, "formal.html"
+  plug(:put_layout, "formal.html")
 
   alias Koala.Accounts
   alias Koala.Accounts.User
@@ -20,10 +20,10 @@ defmodule KoalaWeb.RegistrationController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User created successfully.")
-        |> redirect(to: registration_path(conn, :success))
+        |> redirect(to: Helpers.registration_path(conn, :success))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "register.html", changeset: changeset)
     end
   end
-
 end

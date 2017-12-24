@@ -28,8 +28,9 @@ defmodule KoalaWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/koala_web/templates",
-                        namespace: KoalaWeb
+      use Phoenix.View,
+        root: "lib/koala_web/templates",
+        namespace: KoalaWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]

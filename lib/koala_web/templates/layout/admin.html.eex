@@ -23,7 +23,7 @@
             <li><%= link "Sitio web", to: "/", target: "_blank" %></li>
             <li><%= link "Imágenes", to: image_path(@conn, :index) %></li>
             <li><%= link "Usuarios", to: user_path(@conn, :index) %></li>
-            <li><%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %></li>
+            <li><%= link "Logout", to: Helper.auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %></li>
           </ul>
         </nav>
         <span class="logo"></span>

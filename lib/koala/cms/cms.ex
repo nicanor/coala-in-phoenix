@@ -23,32 +23,50 @@ defmodule Koala.CMS do
   end
 
   def public_publications do
-    query = from(p in Publication, where: p.public == true, select: struct(p, [:title, :slug, :description]))
+    query =
+      from(
+        p in Publication,
+        where: p.public == true,
+        select: struct(p, [:title, :slug, :description])
+      )
+
     Repo.all(query)
   end
 
   def public_publications(category_id) do
-    query = from(p in Publication,
-            where: [public: true, category_id: ^category_id],
-            select: struct(p, [:title, :slug, :description]))
+    query =
+      from(
+        p in Publication,
+        where: [public: true, category_id: ^category_id],
+        select: struct(p, [:title, :slug, :description])
+      )
+
     Repo.all(query)
   end
 
   def index do
-    query = from c in Category,
-      left_join: p in assoc(c, :publications),
-      preload: [publications: p],
-      select: [:id, :name, :slug, publications: [:id, :category_id, :title, :slug]]
-    Repo.all query
+    query =
+      from(
+        c in Category,
+        left_join: p in assoc(c, :publications),
+        preload: [publications: p],
+        select: [:id, :name, :slug, publications: [:id, :category_id, :title, :slug]]
+      )
+
+    Repo.all(query)
   end
 
   def public_index do
-    query = from c in Category,
-      join: p in assoc(c, :publications),
-      where: p.public == true,
-      preload: [publications: p],
-      select: [:id, :name, :slug, publications: [:id, :category_id, :title, :slug]]
-    Repo.all query
+    query =
+      from(
+        c in Category,
+        join: p in assoc(c, :publications),
+        where: p.public == true,
+        preload: [publications: p],
+        select: [:id, :name, :slug, publications: [:id, :category_id, :title, :slug]]
+      )
+
+    Repo.all(query)
   end
 
   @doc """
@@ -69,11 +87,15 @@ defmodule Koala.CMS do
   def get_publication!(slug), do: Repo.get_by!(Publication, slug: slug)
 
   def get_publication_with_category!(slug) do
-    query = from p in Publication,
-      join: c in  Category,
-      on: p.category_id == c.id,
-      where: p.slug == ^slug,
-      preload: [category: c]
+    query =
+      from(
+        p in Publication,
+        join: c in Category,
+        on: p.category_id == c.id,
+        where: p.slug == ^slug,
+        preload: [category: c]
+      )
+
     Repo.one!(query)
   end
 
@@ -220,7 +242,6 @@ defmodule Koala.CMS do
     Image.changeset(image, %{})
   end
 
-
   @doc """
   Returns the list of categories.
 
@@ -235,11 +256,11 @@ defmodule Koala.CMS do
   end
 
   def list_categories_with_publications do
-    Repo.all from c in Category, preload: [:publications]
+    Repo.all(from(c in Category, preload: [:publications]))
   end
 
   def list_categories_for_select do
-    Repo.all from c in Category, order_by: c.name, select: {c.name, c.id}
+    Repo.all(from(c in Category, order_by: c.name, select: {c.name, c.id}))
   end
 
   @doc """
@@ -258,13 +279,18 @@ defmodule Koala.CMS do
   """
   def get_category!(id) when is_integer(id), do: Repo.get!(Category, id)
   def get_category!(slug), do: Repo.get_by!(Category, slug: slug)
+
   def get_category_with_publications!(slug) do
-    query = from c in Category,
-              left_join: p in Publication,
-              on: p.category_id == c.id,
-              where: c.slug == ^slug,
-              preload: [publications: p]
-    Repo.one! query
+    query =
+      from(
+        c in Category,
+        left_join: p in Publication,
+        on: p.category_id == c.id,
+        where: c.slug == ^slug,
+        preload: [publications: p]
+      )
+
+    Repo.one!(query)
   end
 
   @doc """

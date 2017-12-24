@@ -6,16 +6,14 @@
 use Mix.Config
 
 # General application configuration
-config :koala,
-  ecto_repos: [Koala.Repo]
+config :koala, ecto_repos: [Koala.Repo]
 
 # Configures the endpoint
 config :koala, KoalaWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "M3XzYNFGXSuBFnfDlayWAchn2Qm60YaozkNbhrE5SqIdovobDlrvLcEJkYqqGQDq",
   render_errors: [view: KoalaWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Koala.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Koala.PubSub, adapter: Phoenix.PubSub.PG2]
 
 config :koala, KoalaWeb.Gettext, default_locale: "es_AR"
 
@@ -26,4 +24,4 @@ config :logger, :console,
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"

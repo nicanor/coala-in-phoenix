@@ -6,10 +6,10 @@ defmodule Koala.CMS.Category do
   @derive {Phoenix.Param, key: :slug}
 
   schema "categories" do
-    field :description, :string
-    field :name, :string
-    field :slug, :string
-    has_many :publications, Koala.CMS.Publication
+    field(:description, :string)
+    field(:name, :string)
+    field(:slug, :string)
+    has_many(:publications, Koala.CMS.Publication)
 
     timestamps()
   end
@@ -27,5 +27,6 @@ defmodule Koala.CMS.Category do
   def add_slug(%Ecto.Changeset{changes: %{name: name}} = changeset) do
     put_change(changeset, :slug, Slugger.slugify_downcase(name))
   end
+
   def add_slug(changeset), do: changeset
 end

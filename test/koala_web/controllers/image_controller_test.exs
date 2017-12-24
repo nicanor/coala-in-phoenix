@@ -12,31 +12,31 @@ defmodule KoalaWeb.ImageControllerTest do
 
   describe "index" do
     test "lists all images", %{conn: conn} do
-      conn = get conn, image_path(conn, :index)
+      conn = get(conn, image_path(conn, :index))
       assert html_response(conn, 200) =~ "Lista de imágenes"
     end
   end
 
   describe "new image" do
     test "renders form", %{conn: conn} do
-      conn = get conn, image_path(conn, :new)
+      conn = get(conn, image_path(conn, :new))
       assert html_response(conn, 200) =~ "Nueva imagen"
     end
   end
 
   describe "create image" do
     test "redirects to show when data is valid", %{conn: conn} do
-      conn = post conn, image_path(conn, :create), image: @create_attrs
+      conn = post(conn, image_path(conn, :create), image: @create_attrs)
 
       assert %{id: id} = redirected_params(conn)
       assert redirected_to(conn) == image_path(conn, :show, id)
 
-      conn = get conn, image_path(conn, :show, id)
+      conn = get(conn, image_path(conn, :show, id))
       assert html_response(conn, 200) =~ "Imágen"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
-      conn = post conn, image_path(conn, :create), image: @invalid_attrs
+      conn = post(conn, image_path(conn, :create), image: @invalid_attrs)
       assert html_response(conn, 200) =~ "Nueva imagen"
     end
   end
@@ -45,11 +45,12 @@ defmodule KoalaWeb.ImageControllerTest do
     setup [:create_image]
 
     test "deletes chosen image", %{conn: conn, image: image} do
-      conn = delete conn, image_path(conn, :delete, image)
+      conn = delete(conn, image_path(conn, :delete, image))
       assert redirected_to(conn) == image_path(conn, :index)
-      assert_error_sent 404, fn ->
-        get conn, image_path(conn, :show, image)
-      end
+
+      assert_error_sent(404, fn ->
+        get(conn, image_path(conn, :show, image))
+      end)
     end
   end
 

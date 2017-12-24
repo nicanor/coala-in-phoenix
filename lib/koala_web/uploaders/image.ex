@@ -29,15 +29,17 @@ defmodule KoalaWeb.Image do
   # Override the persisted filenames:
   def filename(version, {file, _scope}) do
     extension = Path.extname(file.file_name)
+
     file_name =
       file.file_name
       |> Path.basename(extension)
       |> Slugger.slugify_downcase()
+
     name(version, file_name)
   end
 
-  defp name("original", file_name), do: file_name;
-  defp name(:original, file_name), do: file_name;
+  defp name("original", file_name), do: file_name
+  defp name(:original, file_name), do: file_name
   defp name(version, file_name), do: "#{version}-#{file_name}"
 
   # Override the storage directory:

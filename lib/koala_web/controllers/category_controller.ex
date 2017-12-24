@@ -1,7 +1,7 @@
 defmodule KoalaWeb.CategoryController do
   use KoalaWeb, :controller
 
-  plug :put_layout, "admin.html"
+  plug(:put_layout, "admin.html")
 
   alias Koala.CMS
   alias Koala.CMS.Category
@@ -17,6 +17,7 @@ defmodule KoalaWeb.CategoryController do
         conn
         |> put_flash(:info, "Category created successfully.")
         |> redirect(to: category_path(conn, :show, category))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
@@ -41,6 +42,7 @@ defmodule KoalaWeb.CategoryController do
         conn
         |> put_flash(:info, "Category updated successfully.")
         |> redirect(to: category_path(conn, :show, category))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", category: category, changeset: changeset)
     end

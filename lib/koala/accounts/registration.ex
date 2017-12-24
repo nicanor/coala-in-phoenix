@@ -19,6 +19,7 @@ defmodule Koala.Accounts.Registration do
     |> validate_confirmation(:password)
     |> put_change(:crypted_password, Comeonin.Bcrypt.hashpwsalt(password))
   end
+
   defp hash_password(changeset), do: changeset
 
   # def password_changeset(model, params \\ %{}) do
@@ -26,5 +27,4 @@ defmodule Koala.Accounts.Registration do
   #   |> cast(params, ~w(password password_confirmation))
   #   |> hash_password
   # end
-
 end

@@ -1,7 +1,7 @@
 defmodule KoalaWeb.UserController do
   use KoalaWeb, :controller
 
-  plug :put_layout, "admin.html"
+  plug(:put_layout, "admin.html")
 
   alias Koala.Accounts
   alias Koala.Accounts.User
@@ -25,6 +25,7 @@ defmodule KoalaWeb.UserController do
         conn
         |> put_flash(:info, "User updated successfully.")
         |> redirect(to: user_path(conn, :index))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
     end

@@ -1,7 +1,7 @@
 defmodule KoalaWeb.AuthController do
   use KoalaWeb, :controller
 
-  plug :put_layout, "formal.html"
+  plug(:put_layout, "formal.html")
 
   alias Koala.Accounts
   alias Koala.Accounts.User
@@ -18,8 +18,10 @@ defmodule KoalaWeb.AuthController do
         |> put_session(:user_email, user.email)
         |> put_flash(:info, "User loged in successfully.")
         |> redirect(to: publication_path(conn, :index))
+
       {:error, _} ->
         changeset = Accounts.change_user(%User{})
+
         conn
         |> put_flash(:info, "Can't login.")
         |> render("new.html", changeset: changeset)
@@ -32,5 +34,4 @@ defmodule KoalaWeb.AuthController do
     |> put_flash(:info, "Logged out.")
     |> redirect(to: public_path(conn, :index))
   end
-
 end

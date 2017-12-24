@@ -9,20 +9,25 @@ defmodule KoalaWeb.PublicController do
   end
 
   def show(conn, %{"category_slug" => category_slug, "publication_slug" => publication_slug}) do
-    category = CMS.get_category!(category_slug)
-    publication = CMS.get_publication!(publication_slug)
+    publication = CMS.get_publication_with_category!(publication_slug)
 
-    case publication.category_id == category.id do
+    case publication.category.slug == category_slug do
       false ->
         conn
-          |> put_status(:not_found)
-          |> put_view(KoalaWeb.ErrorView)
-          |> render("404.html")
-      true ->
-        publications = CMS.public_publications(category.id)
+        |> put_status(:not_found)
+        |> put_view(KoalaWeb.ErrorView)
+        |> render("404.html")
 
-        render(conn, "show.html", publication: publication, category: category, publications: publications)
+      true ->
+        publications = CMS.public_publications(publication.category_id)
+
+        render(
+          conn,
+          "show.html",
+          publication: publication,
+          category: publication.category,
+          publications: publications
+        )
     end
   end
-
 end

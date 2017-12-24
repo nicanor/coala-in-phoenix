@@ -1,7 +1,7 @@
 defmodule KoalaWeb.ImageController do
   use KoalaWeb, :controller
 
-  plug :put_layout, "admin.html"
+  plug(:put_layout, "admin.html")
 
   alias Koala.CMS
   alias Koala.CMS.Image
@@ -22,6 +22,7 @@ defmodule KoalaWeb.ImageController do
         conn
         |> put_flash(:info, "Image created successfully.")
         |> redirect(to: image_path(conn, :show, image))
+
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end

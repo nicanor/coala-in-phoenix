@@ -6,9 +6,30 @@ defmodule Koala.CMSTest do
   describe "publications" do
     alias Koala.CMS.Publication
 
-    @valid_attrs %{content: "some content", description: "some description", facebook_path: "some facebook_path", public: true, publication_date: ~D[2010-04-17], title: "some title"}
-    @update_attrs %{content: "some updated content", description: "some updated description", facebook_path: "some updated facebook_path", public: false, publication_date: ~D[2011-05-18], title: "some updated title"}
-    @invalid_attrs %{content: nil, description: nil, facebook_path: nil, public: nil, publication_date: nil,  title: nil}
+    @valid_attrs %{
+      content: "some content",
+      description: "some description",
+      facebook_path: "some facebook_path",
+      public: true,
+      publication_date: ~D[2010-04-17],
+      title: "some title"
+    }
+    @update_attrs %{
+      content: "some updated content",
+      description: "some updated description",
+      facebook_path: "some updated facebook_path",
+      public: false,
+      publication_date: ~D[2011-05-18],
+      title: "some updated title"
+    }
+    @invalid_attrs %{
+      content: nil,
+      description: nil,
+      facebook_path: nil,
+      public: nil,
+      publication_date: nil,
+      title: nil
+    }
 
     def publication_fixture(attrs \\ %{}) do
       {:ok, publication} =

@@ -15,5 +15,4 @@ defmodule KoalaWeb.UserView do
       {dgettext("accounts", "Guest"), "guest"}
     ]
   end
-
 end

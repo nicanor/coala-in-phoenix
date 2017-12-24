@@ -5,7 +5,7 @@ defmodule Koala.CMS.Image do
   use Arc.Ecto.Schema
 
   schema "images" do
-    field :image, KoalaWeb.Image.Type
+    field(:image, KoalaWeb.Image.Type)
 
     timestamps()
   end

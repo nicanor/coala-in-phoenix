@@ -11,7 +11,7 @@ defmodule Koala.Application do
       # Start the Ecto repository
       supervisor(Koala.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(KoalaWeb.Endpoint, []),
+      supervisor(KoalaWeb.Endpoint, [])
       # Start your own worker by calling: Koala.Worker.start_link(arg1, arg2, arg3)
       # worker(Koala.Worker, [arg1, arg2, arg3]),
     ]
