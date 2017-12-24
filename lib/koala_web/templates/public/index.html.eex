@@ -20,7 +20,7 @@
       <h2><%= category.name %></h2>
       <p><%= category.description %></p>
       <ul>
-        <%= for publication <- Enum.sort_by(category.publications, &(!&1.public)) do %>
+        <%= for publication <- category.publications do %>
           <li><%= link publication.title, to: public_path(@conn, :show, category, publication) %></li>
         <% end %>
       </ul>
