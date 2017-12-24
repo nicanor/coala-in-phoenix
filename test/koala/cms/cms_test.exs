@@ -45,6 +45,26 @@ defmodule Koala.CMSTest do
       assert CMS.list_publications() == [publication]
     end
 
+    test "public_publications/0 returns all public publications" do
+      publication = publication_fixture()
+      publication_fixture(%{title: "non public publication", public: false})
+      [public_publication] = CMS.public_publications()
+      assert public_publication.title == publication.title
+      assert public_publication.slug == publication.slug
+      assert public_publication.description == publication.description
+    end
+
+    test "public_publications/1 returns all public publications" do
+      category = category_fixture()
+      publication = publication_fixture(category_id: category.id)
+      publication_fixture(%{title: "other public publication"})
+
+      [public_publication] = CMS.public_publications(category.id)
+      assert public_publication.title == publication.title
+      assert public_publication.slug == publication.slug
+      assert public_publication.description == publication.description
+    end
+
     test "get_publication!/1 returns the publication with given id" do
       publication = publication_fixture()
       assert CMS.get_publication!(publication.id) == publication

@@ -22,26 +22,22 @@ defmodule Koala.CMS do
     Repo.all(Publication)
   end
 
-  def public_publications do
-    query =
-      from(
-        p in Publication,
-        where: p.public == true,
-        select: struct(p, [:title, :slug, :description])
-      )
+  defp public_query do
+    from(
+      Publication,
+      where: [public: true],
+      select: [:title, :slug, :description]
+    )
+  end
 
-    Repo.all(query)
+  def public_publications do
+    Repo.all(public_query)
   end
 
   def public_publications(category_id) do
-    query =
-      from(
-        p in Publication,
-        where: [public: true, category_id: ^category_id],
-        select: struct(p, [:title, :slug, :description])
-      )
-
-    Repo.all(query)
+    public_query
+    |> where([category_id: ^category_id])
+    |> Repo.all()
   end
 
   def index do
