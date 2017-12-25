@@ -9,8 +9,7 @@ defmodule Koala.AccountsTest do
     @valid_attrs %{
       password: "some-password",
       password_confirmation: "some-password",
-      email: "some@email.com",
-      role: "editor"
+      email: "some@email.com"
     }
     @update_attrs %{
       password: "some-updated-password",
@@ -50,7 +49,7 @@ defmodule Koala.AccountsTest do
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
       assert user.email == "some@email.com"
-      assert user.role == "editor"
+      assert user.role == "guest"
       assert user.password == "some-password"
     end
 

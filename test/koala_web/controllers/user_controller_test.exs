@@ -6,8 +6,7 @@ defmodule KoalaWeb.UserControllerTest do
   @create_attrs %{
     password: "some-password",
     password_confirmation: "some-password",
-    email: "some@email.com",
-    role: "editor"
+    email: "some@email.com"
   }
   @update_attrs %{
     password: "some-updated-password",
@@ -29,30 +28,6 @@ defmodule KoalaWeb.UserControllerTest do
     end
   end
 
-  describe "new user" do
-    test "renders form", %{conn: conn} do
-      conn = get(conn, user_path(conn, :new))
-      assert html_response(conn, 200) =~ "Nuevo usuario"
-    end
-  end
-
-  describe "create user" do
-    test "redirects to show when data is valid", %{conn: conn} do
-      conn = post(conn, user_path(conn, :create), user: @create_attrs)
-
-      assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == user_path(conn, :show, id)
-
-      conn = get(conn, user_path(conn, :show, id))
-      assert html_response(conn, 200) =~ "Ver usuario"
-    end
-
-    test "renders errors when data is invalid", %{conn: conn} do
-      conn = post(conn, user_path(conn, :create), user: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Nuevo usuario"
-    end
-  end
-
   describe "edit user" do
     setup [:create_user]
 
@@ -67,9 +42,9 @@ defmodule KoalaWeb.UserControllerTest do
 
     test "redirects when data is valid", %{conn: conn, user: user} do
       conn = put(conn, user_path(conn, :update, user), user: @update_attrs)
-      assert redirected_to(conn) == user_path(conn, :show, user)
+      assert redirected_to(conn) == user_path(conn, :index)
 
-      conn = get(conn, user_path(conn, :show, user))
+      conn = get(conn, user_path(conn, :index))
       assert html_response(conn, 200) =~ "some.updated@email.com"
     end
 
@@ -87,7 +62,7 @@ defmodule KoalaWeb.UserControllerTest do
       assert redirected_to(conn) == user_path(conn, :index)
 
       assert_error_sent(404, fn ->
-        get(conn, user_path(conn, :show, user))
+        get(conn, user_path(conn, :edit, user))
       end)
     end
   end
