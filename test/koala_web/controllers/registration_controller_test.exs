@@ -1,4 +1,4 @@
-defmodule KoalaWeb.UserControllerTest do
+defmodule KoalaWeb.RegistrationControllerTest do
   use KoalaWeb.ConnCase
 
   alias Koala.Accounts
