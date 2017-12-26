@@ -9,12 +9,17 @@ defmodule KoalaWeb.Router do
     plug(:put_secure_browser_headers)
   end
 
+  pipeline :admin do
+    plug KoalaWeb.Authenticate
+  end
+
   pipeline :api do
     plug(:accepts, ["json"])
   end
 
   scope "/admin", KoalaWeb do
-    pipe_through(:browser)
+    pipe_through([:browser, :admin])
+
     resources("/categories", CategoryController, except: [:index])
     resources("/publications", PublicationController)
     resources("/images", ImageController)

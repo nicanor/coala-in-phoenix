@@ -15,7 +15,7 @@ defmodule KoalaWeb.AuthController do
     case Accounts.authenticate(email, password) do
       {:ok, user} ->
         conn
-        |> put_session(:user_email, user.email)
+        |> put_session(:user_id, user.id)
         |> put_flash(:info, "User loged in successfully.")
         |> redirect(to: publication_path(conn, :index))
 
@@ -30,7 +30,7 @@ defmodule KoalaWeb.AuthController do
 
   def delete(conn, _) do
     conn
-    |> delete_session(:user_email)
+    |> delete_session(:user_id)
     |> put_flash(:info, "Logged out.")
     |> redirect(to: public_path(conn, :index))
   end

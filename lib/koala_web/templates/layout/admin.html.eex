@@ -20,7 +20,6 @@
             <%= img_tag("/images/logo-verde.png", class: "logo") %>
           <% end %>
           <ul class="nav nav-pills pull-right">
-            <li><%= link "Sitio web", to: "/", target: "_blank" %></li>
             <li><%= link "Imágenes", to: image_path(@conn, :index) %></li>
             <li><%= link "Usuarios", to: user_path(@conn, :index) %></li>
             <li><%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %></li>
@@ -35,6 +34,10 @@
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
+
+      <footer class="navbar-fixed-bottom" style='text-align:center;'>
+        <p><%= link "Ir al sitio web", to: "/" %></p>
+      </footer>
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
