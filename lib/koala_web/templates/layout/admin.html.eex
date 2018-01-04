@@ -26,7 +26,12 @@
           </ul>
         </nav>
         <span class="logo"></span>
+
       </header>
+      <p>
+        <strong>Cuenta:</strong> <%= current_user_email(@conn) %>.
+        <strong>Permisos:</strong> <%= current_user_role(@conn) %>.
+      </p>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>

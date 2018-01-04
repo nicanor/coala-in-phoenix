@@ -37,7 +37,7 @@ defmodule KoalaWeb do
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
-
+      import KoalaWeb.Session
       import KoalaWeb.Router.Helpers
       import KoalaWeb.ErrorHelpers
       import KoalaWeb.Gettext

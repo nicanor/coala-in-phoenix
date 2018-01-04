@@ -8,6 +8,11 @@ defmodule KoalaWeb.PublicController do
     render(conn, "index.html", categories: categories)
   end
 
+  def category(conn, %{"category_slug" => category_slug}) do
+    category = CMS.get_category_with_publications!(category_slug)
+    render(conn, "category.html", category: category)
+  end
+
   def show(conn, %{"category_slug" => category_slug, "publication_slug" => publication_slug}) do
     publication = CMS.get_publication_with_category!(publication_slug)
 

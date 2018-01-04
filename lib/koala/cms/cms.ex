@@ -24,14 +24,14 @@ defmodule Koala.CMS do
 
   def public_publications do
     Publication
-    |> where([public: true])
+    |> where(public: true)
     |> Repo.all()
   end
 
   def public_publications(category_id) do
     Publication
-    |> where([public: true])
-    |> where([category_id: ^category_id])
+    |> where(public: true)
+    |> where(category_id: ^category_id)
     |> Repo.all()
   end
 

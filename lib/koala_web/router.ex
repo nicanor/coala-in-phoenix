@@ -10,7 +10,7 @@ defmodule KoalaWeb.Router do
   end
 
   pipeline :admin do
-    plug KoalaWeb.Authenticate
+    plug(KoalaWeb.Authenticate)
   end
 
   pipeline :api do
@@ -34,6 +34,7 @@ defmodule KoalaWeb.Router do
     get("/registrarme", RegistrationController, :register)
     get("/registro_exitoso", RegistrationController, :success)
     post("/registrarme", RegistrationController, :create)
+    get("/:category_slug", PublicController, :category)
     get("/:category_slug/:publication_slug", PublicController, :show)
     get("/", PublicController, :index)
   end

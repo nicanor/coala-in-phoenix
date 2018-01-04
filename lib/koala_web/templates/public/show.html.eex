@@ -1,15 +1,16 @@
 <article class="content">
+  <p><%= link @category.name, to: public_path(@conn, :category, @category) %></p>
   <h1><%= @publication.title %></h1>
   <%= @publication.content |> Earmark.as_html! |> raw %>
 </article>
 
 <section class="articles">
   <nav class="articles-inner">
-      <h2><%= @category.name %></h2>
-      <ul>
-        <%= for publication <- @publications do %>
-          <li><%= link publication.title, to: public_path(@conn, :show, @category, publication) %></li>
-        <% end %>
-      </ul>
+    <h2><%= @category.name %></h2>
+    <ul>
+      <%= for publication <- @publications do %>
+        <li><%= link publication.title, to: public_path(@conn, :show, @category, publication) %></li>
+      <% end %>
+    </ul>
   </nav>
 </section>

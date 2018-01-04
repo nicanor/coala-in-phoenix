@@ -27,5 +27,6 @@
 
   <div class="form-group">
     <%= submit gettext("Submit"), class: "btn btn-primary" %>
+    <%= link "o Iniciar Sesión", to: auth_path(@conn, :new), class: "btn btn-link" %>
   </div>
 <% end %>

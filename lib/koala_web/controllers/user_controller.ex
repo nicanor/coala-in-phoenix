@@ -4,7 +4,7 @@ defmodule KoalaWeb.UserController do
   plug(:put_layout, "admin.html")
 
   alias Koala.Accounts
-  alias Koala.Accounts.User
+  # alias Koala.Accounts.User
 
   def index(conn, _params) do
     users = Accounts.list_users()
@@ -21,7 +21,7 @@ defmodule KoalaWeb.UserController do
     user = Accounts.get_user!(id)
 
     case Accounts.update_user(user, user_params) do
-      {:ok, user} ->
+      {:ok, _user} ->
         conn
         |> put_flash(:info, "User updated successfully.")
         |> redirect(to: user_path(conn, :index))

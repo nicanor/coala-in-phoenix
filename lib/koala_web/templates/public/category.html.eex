@@ -1,0 +1,19 @@
+<article class="content">
+  <h1><%= @category.name %></h1>
+
+  <div class="jumbotron">
+    <p class="lead">
+      <%= @category.description %>
+    </p>
+  </div>
+</article>
+
+<section class="articles">
+  <nav class="articles-inner">
+    <ul>
+      <%= for publication <- @category.publications do %>
+        <li><%= link publication.title, to: public_path(@conn, :show, @category, publication) %></li>
+      <% end %>
+    </ul>
+  </nav>
+</section>

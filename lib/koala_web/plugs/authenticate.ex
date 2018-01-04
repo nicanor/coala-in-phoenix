@@ -5,29 +5,29 @@ defmodule KoalaWeb.Authenticate do
 
   def init(opts), do: opts
 
-  def authenticate(conn) do
+  def authenticate(nil), do: :error
+
+  def authenticate(user_id) do
     try do
-      case get_session(conn, :user_id) do
-        nil ->
-          :error
-        user_id ->
-          user = Accounts.get_user!(user_id)
-          {:ok, user}
-        end
+      user = Accounts.get_user!(user_id)
+      {:ok, user}
     rescue
-      e in Ecto.NoResultsError -> :error
+      _ in Ecto.NoResultsError -> :error
     end
   end
 
   def call(conn, _opts) do
-    case authenticate(conn) do
+    user_id = get_session(conn, :user_id)
+
+    case authenticate(user_id) do
       {:ok, user} ->
         conn
         |> assign(:current_user, user)
+
       :error ->
         conn
-        |> send_resp(401, "Error 401")
-        |> halt
+        |> Phoenix.Controller.redirect(to: "/login")
+        |> halt()
     end
   end
 end

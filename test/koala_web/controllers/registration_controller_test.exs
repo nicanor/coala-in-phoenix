@@ -29,8 +29,8 @@ defmodule KoalaWeb.RegistrationControllerTest do
 
       assert redirected_to(conn) == registration_path(conn, :success)
 
-#      conn = get(conn, user_path(conn, :show, id))
-#      assert html_response(conn, 200) =~ "Ver usuario"
+      #      conn = get(conn, user_path(conn, :show, id))
+      #      assert html_response(conn, 200) =~ "Ver usuario"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
