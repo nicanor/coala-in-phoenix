@@ -19,6 +19,8 @@ config :koala, KoalaWeb.Endpoint,
 
 config :koala, KoalaWeb.Gettext, default_locale: "es_AR"
 
+config :mix_docker, image: "fedeotaran/coala-web"
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",

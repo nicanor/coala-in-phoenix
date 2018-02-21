@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+
+  web:
+    image: "fedeotaran/coala-web:0.1.0"
+    command: foreground
+    volumes:
+      - .:/app
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    environment:
+      MIX_ENV: "prod"
+      DATABASE_URL: "ecto://postgres:postgres@db/koala"
+      POOL_SIZE: 10
+      PORT: 4000
+
+  db:
+    image: postgres
+    volumes:
+      - 'postgre-data:/var/lib/postgresql'
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_HOST: 'db'
+
+volumes:
+  postgre-data:
+

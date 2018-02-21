@@ -5,7 +5,7 @@ defmodule Koala.Mixfile do
     [
       app: :koala,
       version: "0.0.1",
-      elixir: "~> 1.4",
+      elixir: "~> 1.4.2",
       elixirc_paths: elixirc_paths(Mix.env),
       compilers: [:phoenix, :gettext] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
@@ -46,7 +46,9 @@ defmodule Koala.Mixfile do
       {:arc_ecto, "~> 0.7.0"},
       {:slugger, "~> 0.2"},
       {:comeonin, "~> 4.0"},
-      {:bcrypt_elixir, "~> 1.0"}
+      #{:bcrypt_elixir, "~> 1.0"},
+      {:pbkdf2_elixir, "~> 0.12.3"},
+      {:mix_docker, "~> 0.5.0"}
     ]
   end
 
