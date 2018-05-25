@@ -16,21 +16,25 @@ defmodule KoalaWeb.UserControllerTest do
   }
   @invalid_attrs %{password: nil, password_confirmation: nil, email: nil, role: nil}
 
+  setup do
+    current_user = fixture(:user)
+    conn = assign(build_conn(), :current_user, current_user)
+    {:ok, conn: conn, user: current_user}
+  end
+
   def fixture(:user) do
     {:ok, user} = Accounts.create_user(@create_attrs)
     user
   end
 
   describe "index" do
-    test "lists all users", %{conn: conn} do
+    test "lists all users", %{conn: conn, user: _} do
       conn = get(conn, user_path(conn, :index))
       assert html_response(conn, 200) =~ "Listado de usuarios"
     end
   end
 
   describe "edit user" do
-    setup [:create_user]
-
     test "renders form for editing chosen user", %{conn: conn, user: user} do
       conn = get(conn, user_path(conn, :edit, user))
       assert html_response(conn, 200) =~ "Editar usuario"
@@ -38,8 +42,6 @@ defmodule KoalaWeb.UserControllerTest do
   end
 
   describe "update user" do
-    setup [:create_user]
-
     test "redirects when data is valid", %{conn: conn, user: user} do
       conn = put(conn, user_path(conn, :update, user), user: @update_attrs)
       assert redirected_to(conn) == user_path(conn, :index)
@@ -55,20 +57,13 @@ defmodule KoalaWeb.UserControllerTest do
   end
 
   describe "delete user" do
-    setup [:create_user]
-
     test "deletes chosen user", %{conn: conn, user: user} do
       conn = delete(conn, user_path(conn, :delete, user))
       assert redirected_to(conn) == user_path(conn, :index)
 
-      assert_error_sent(404, fn ->
+      assert_error_sent(500, fn ->
         get(conn, user_path(conn, :edit, user))
       end)
     end
-  end
-
-  defp create_user(_) do
-    user = fixture(:user)
-    {:ok, user: user}
   end
 end

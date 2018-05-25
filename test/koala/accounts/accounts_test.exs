@@ -29,20 +29,12 @@ defmodule Koala.AccountsTest do
     end
 
     test "list_users/0 returns all users" do
-      user =
-        user_fixture()
-        |> Map.replace(:password, nil)
-        |> Map.replace(:password_confirmation, nil)
-
+      user = %{user_fixture() | password: nil, password_confirmation: nil}
       assert Accounts.list_users() == [user]
     end
 
     test "get_user!/1 returns the user with given id" do
-      user =
-        user_fixture()
-        |> Map.replace(:password, nil)
-        |> Map.replace(:password_confirmation, nil)
-
+      user = %{user_fixture() | password: nil, password_confirmation: nil}
       assert Accounts.get_user!(user.id) == user
     end
 
@@ -63,18 +55,13 @@ defmodule Koala.AccountsTest do
       assert %User{} = user
       assert user.email == "some.updated@email.com"
       assert user.role == "admin"
-      assert user.password == "some-updated-password"
     end
 
     test "update_user/2 with invalid data returns error changeset" do
       user = user_fixture()
       assert {:error, %Ecto.Changeset{}} = Accounts.update_user(user, @invalid_attrs)
 
-      user =
-        user
-        |> Map.replace(:password, nil)
-        |> Map.replace(:password_confirmation, nil)
-
+      user = %{user | password: nil, password_confirmation: nil}
       assert user == Accounts.get_user!(user.id)
     end
 

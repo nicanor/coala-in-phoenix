@@ -10,4 +10,8 @@ defmodule KoalaWeb.Session do
   defp current_user(conn) do
     conn.assigns[:current_user]
   end
+
+  def is_admin?(conn) do
+    current_user_role(conn) == "admin"
+  end
 end

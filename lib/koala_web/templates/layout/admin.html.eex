@@ -21,8 +21,10 @@
           <% end %>
           <ul class="nav nav-pills pull-right">
             <li><%= link "Imágenes", to: image_path(@conn, :index) %></li>
+            <%= if is_admin?(@conn) do %>
             <li><%= link "Usuarios", to: user_path(@conn, :index) %></li>
-            <li><%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %></li>
+            <% end %>
+            <li><%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn logout-button btn-danger" %></li>
           </ul>
         </nav>
         <span class="logo"></span>

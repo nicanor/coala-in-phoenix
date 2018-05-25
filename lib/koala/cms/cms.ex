@@ -268,6 +268,13 @@ defmodule Koala.CMS do
       ** (Ecto.NoResultsError)
 
   """
+
+  def get_publication_and_category!(publication_slug, category_slug) do
+    category = get_category_with_publications!(category_slug)
+    publication = Enum.find(category.publications, fn p -> p.slug == publication_slug end)
+    {publication, category}
+  end
+
   def get_category!(id) when is_integer(id), do: Repo.get!(Category, id)
   def get_category!(slug), do: Repo.get_by!(Category, slug: slug)
 

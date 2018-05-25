@@ -1,7 +1,7 @@
 defmodule KoalaWeb.UserController do
   use KoalaWeb, :controller
 
-  plug(:put_layout, "admin.html")
+  plug(KoalaWeb.Authorize, ["admin"])
 
   alias Koala.Accounts
   # alias Koala.Accounts.User

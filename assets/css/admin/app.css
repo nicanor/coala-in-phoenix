@@ -23,3 +23,7 @@ tr.category {
 footer.body-footer {
   margin-top: 30px;
 }
+
+.logout-button:hover {
+  background-color: #d9534f;
+}

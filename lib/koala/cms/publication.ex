@@ -31,7 +31,7 @@ defmodule Koala.CMS.Publication do
       :facebook_path,
       :category_id
     ])
-    |> add_slug
+    |> add_slug()
     |> validate_required([:title, :slug, :description, :content, :public, :publication_date])
     |> validate_format(:slug, ~r/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
     |> unique_constraint(:slug)

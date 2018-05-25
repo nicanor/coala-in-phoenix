@@ -1,7 +1,7 @@
 defmodule KoalaWeb.CategoryController do
   use KoalaWeb, :controller
 
-  plug(:put_layout, "admin.html")
+  plug(KoalaWeb.Authorize, ["admin", "editor", "guest"])
 
   alias Koala.CMS
   alias Koala.CMS.Category

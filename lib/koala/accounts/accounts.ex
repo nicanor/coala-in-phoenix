@@ -11,7 +11,7 @@ defmodule Koala.Accounts do
   alias Koala.Accounts.User
   alias Koala.Accounts.Registration
 
-  def authenticate(email, password) do
+  def validate_credentials(email, password) do
     user = Repo.get_by(User, email: email)
 
     cond do

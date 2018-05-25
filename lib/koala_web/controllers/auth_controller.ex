@@ -12,7 +12,7 @@ defmodule KoalaWeb.AuthController do
   end
 
   def create(conn, %{"user" => %{"email" => email, "password" => password}}) do
-    case Accounts.authenticate(email, password) do
+    case Accounts.validate_credentials(email, password) do
       {:ok, user} ->
         conn
         |> put_session(:user_id, user.id)

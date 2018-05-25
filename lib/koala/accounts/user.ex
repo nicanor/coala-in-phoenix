@@ -19,7 +19,7 @@ defmodule Koala.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:email, :password, :password_confirmation, :role])
+    |> cast(attrs, [:email, :role])
     |> validate_required([:email, :role])
     |> validate_format(:email, ~r/@/)
     |> validate_inclusion(:role, @valid_roles)

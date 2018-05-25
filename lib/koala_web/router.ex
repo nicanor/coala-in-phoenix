@@ -11,6 +11,7 @@ defmodule KoalaWeb.Router do
 
   pipeline :admin do
     plug(KoalaWeb.Authenticate)
+    plug :put_layout, {KoalaWeb.LayoutView, :admin}
   end
 
   pipeline :api do
@@ -20,6 +21,7 @@ defmodule KoalaWeb.Router do
   scope "/admin", KoalaWeb do
     pipe_through([:browser, :admin])
 
+    get("/", PublicationController, :index)
     resources("/categories", CategoryController, except: [:index])
     resources("/publications", PublicationController)
     resources("/images", ImageController)

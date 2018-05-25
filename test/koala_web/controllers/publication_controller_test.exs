@@ -2,6 +2,7 @@ defmodule KoalaWeb.PublicationControllerTest do
   use KoalaWeb.ConnCase
 
   alias Koala.CMS
+  alias Koala.Accounts
 
   @category_create_attrs %{description: "some description", name: "some name"}
 
@@ -65,7 +66,7 @@ defmodule KoalaWeb.PublicationControllerTest do
       publication = CMS.get_publication!(id)
       assert redirected_to(conn) == publication_path(conn, :show, publication)
 
-      conn = get(conn, publication_path(conn, :show, id))
+      conn = get(conn_with_current_user(), publication_path(conn, :show, id))
       assert html_response(conn, 200) =~ "Publicación"
     end
 
@@ -91,8 +92,9 @@ defmodule KoalaWeb.PublicationControllerTest do
       conn = put(conn, publication_path(conn, :update, publication), publication: @update_attrs)
       # To have updated slug.
       publication = CMS.get_publication!(publication.id)
-
       assert redirected_to(conn) == publication_path(conn, :show, publication)
+
+      conn = recycle(conn)
       conn = get(conn, publication_path(conn, :show, publication))
       assert html_response(conn, 200) =~ "some updated content"
     end
@@ -118,6 +120,27 @@ defmodule KoalaWeb.PublicationControllerTest do
 
   defp create_publication(_) do
     publication = fixture(:publication)
-    {:ok, publication: publication}
+    {:ok, conn: build_conn(), publication: publication}
+  end
+
+  setup do
+    {:ok, conn: conn_with_current_user()}
+  end
+
+  defp conn_with_current_user do
+    current_user = fixture(:editor)
+    assign(build_conn(), :current_user, current_user)
+  end
+
+  def fixture(:editor) do
+    {:ok, user} =
+      Accounts.create_user(%{
+        password: "some-password",
+        password_confirmation: "some-password",
+        email: "editor@email.com",
+        role: "admin"
+      })
+
+    user
   end
 end

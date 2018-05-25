@@ -38,9 +38,4 @@ defmodule KoalaWeb.RegistrationControllerTest do
       assert html_response(conn, 200) =~ "Register"
     end
   end
-
-  defp create_user(_) do
-    user = fixture(:user)
-    {:ok, user: user}
-  end
 end

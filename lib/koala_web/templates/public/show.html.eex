@@ -1,7 +1,7 @@
 <article class="content">
   <p><%= link @category.name, to: public_path(@conn, :category, @category) %></p>
   <h1><%= @publication.title %></h1>
-  <%= @publication.content |> Earmark.as_html! |> raw %>
+  <%= raw Earmark.as_html!(@publication.content) %>
 </article>
 
 <section class="articles">
