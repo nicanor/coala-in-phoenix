@@ -9,12 +9,14 @@ use Mix.Config
 # kept out of version control and might be hard to recover
 # or recreate for your teammates (or yourself later on).
 config :koala, KoalaWeb.Endpoint,
+    server: true, # Without this line, your app will not start the web server!
+
     secret_key_base: System.get_env("SECRET_KEY_BASE")
 
-  # Configure your database
-  config :koala, Koala.Repo,
+# Configure your database
+config :koala, Koala.Repo,
     adapter: Ecto.Adapters.Postgres,
     username: System.get_env("DATABASE_USERNAME"),
     password: System.get_env("DATABASE_PASSWORD"),
     database: "koala_prod",
-    pool_size: 15
+    pool_size: 1
