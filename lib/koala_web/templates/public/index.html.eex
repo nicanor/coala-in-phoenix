@@ -14,10 +14,10 @@
 </article>
 
 
-  <%= for category <- @categories do %>
+<%= for category <- @categories do %>
 <section class="articles">
   <nav class="articles-inner">
-      <h2><%= category.name %></h2>
+      <h2 class="category-name"><%= link category.name, to: public_path(@conn, :category, category) %></h2>
       <p><%= category.description %></p>
       <ul>
         <%= for publication <- category.publications do %>
@@ -26,5 +26,4 @@
       </ul>
   </nav>
 </section>
-
 <% end %>

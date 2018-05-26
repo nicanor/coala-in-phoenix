@@ -22,7 +22,7 @@ defmodule Koala.Accounts do
         {:error, :unauthorized}
 
       true ->
-        dummy_checkpw
+        dummy_checkpw()
         {:error, :not_found}
     end
   end

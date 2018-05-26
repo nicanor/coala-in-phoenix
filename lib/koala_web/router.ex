@@ -11,7 +11,7 @@ defmodule KoalaWeb.Router do
 
   pipeline :admin do
     plug(KoalaWeb.Authenticate)
-    plug :put_layout, {KoalaWeb.LayoutView, :admin}
+    plug(:put_layout, {KoalaWeb.LayoutView, :admin})
   end
 
   pipeline :api do

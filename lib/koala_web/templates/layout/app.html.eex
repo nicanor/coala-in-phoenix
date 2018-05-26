@@ -16,11 +16,6 @@
     <header class="header" role="banner">
       <div class="header-inner">
         <div class="logo"><a href="/"><%= img_tag("/images/logo-verde.png", class: "logo") %></a></div>
-        <nav class="navigation">
-          <ul>
-            <li><%= link "Paginas", to: "/" %></li>
-          </ul>
-        </nav>
       </div>
     </header>
     <main>
